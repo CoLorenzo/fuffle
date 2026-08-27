@@ -1,4 +1,6 @@
 # fuffle
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/60b8c168-1f42-4d70-aae7-1e3cc684e5d9" />
+
 
 **File Shuffle** — A command-line tool for shuffling files and assessing directory structures.
 
