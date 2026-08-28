@@ -32,6 +32,13 @@ func loadNetdata(path string) (*NetdataMetrics, error) {
 	}
 
 	if len(data) > 0 && data[0] == '{' {
+		var probe struct {
+			Labels []interface{} `json:"labels"`
+			Data   []interface{} `json:"data"`
+		}
+		if err := json.Unmarshal(data, &probe); err == nil && len(probe.Labels) > 0 && len(probe.Data) > 0 {
+			return parseNetdataLabelsJSON(data)
+		}
 		return parseNetdataJSON(data)
 	}
 	return parseNetdataCSV(data)
@@ -75,6 +82,72 @@ func parseNetdataJSON(data []byte) (*NetdataMetrics, error) {
 	metrics.RAM = append(metrics.RAM, ram)
 	metrics.GPU = append(metrics.GPU, gpu)
 	metrics.Disk = append(metrics.Disk, disk)
+
+	return metrics, nil
+}
+
+func parseNetdataLabelsJSON(data []byte) (*NetdataMetrics, error) {
+	var raw struct {
+		Labels []string    `json:"labels"`
+		Data   [][]float64 `json:"data"`
+	}
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return nil, fmt.Errorf("cannot parse netdata labels JSON: %w", err)
+	}
+
+	if len(raw.Labels) == 0 || len(raw.Data) == 0 {
+		return nil, fmt.Errorf("empty netdata labels data")
+	}
+
+	colIndex := make(map[string]int)
+	for i, l := range raw.Labels {
+		colIndex[l] = i
+	}
+
+	timeIdx, ok := colIndex["time"]
+	if !ok {
+		return nil, fmt.Errorf("no 'time' column in netdata labels")
+	}
+
+	cpuCols := []string{"user", "system", "nice", "iowait", "irq", "softirq", "steal", "guest", "guest_nice"}
+	ramIdx, hasRam := colIndex["ram"]
+	gpuIdx, hasGpu := colIndex["gpu"]
+	diskIdx, hasDisk := colIndex["disk"]
+
+	metrics := &NetdataMetrics{}
+	for _, row := range raw.Data {
+		if len(row) <= int(timeIdx) {
+			continue
+		}
+		ts := int64(row[timeIdx])
+		metrics.Timestamps = append(metrics.Timestamps, ts)
+
+		cpu := 0.0
+		for _, c := range cpuCols {
+			if idx, ok := colIndex[c]; ok && int(idx) < len(row) {
+				cpu += row[idx]
+			}
+		}
+		metrics.CPU = append(metrics.CPU, cpu)
+
+		ram := 0.0
+		if hasRam && int(ramIdx) < len(row) {
+			ram = row[ramIdx]
+		}
+		metrics.RAM = append(metrics.RAM, ram)
+
+		gpu := 0.0
+		if hasGpu && int(gpuIdx) < len(row) {
+			gpu = row[gpuIdx]
+		}
+		metrics.GPU = append(metrics.GPU, gpu)
+
+		disk := 0.0
+		if hasDisk && int(diskIdx) < len(row) {
+			disk = row[diskIdx]
+		}
+		metrics.Disk = append(metrics.Disk, disk)
+	}
 
 	return metrics, nil
 }
