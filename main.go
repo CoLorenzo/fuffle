@@ -57,6 +57,10 @@ func main() {
 		runMix(os.Args[2:])
 	case "--assessment":
 		runAssessment(os.Args[2:])
+	case "--report":
+		runReport(os.Args[2:])
+	case "session":
+		runSession(os.Args[2:])
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown option: %s\n\n", flag)
 		printUsage()
@@ -68,9 +72,18 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
 	fmt.Fprintf(os.Stderr, "  %s --mix <dir1> [dir2] [dir3] ...\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s --assessment <file.txt>\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s --report <evaluations.yaml> [--output <file>] [--serve [:port]]\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session new\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session insert -r \"result\" -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "\nOptions:\n")
 	fmt.Fprintf(os.Stderr, "  --mix          Shuffle files from directories into ./mixed/ with anonymized names\n")
 	fmt.Fprintf(os.Stderr, "  --assessment   Check folder existence from a file listing and print report\n")
+	fmt.Fprintf(os.Stderr, "  --report       Generate report from evaluation YAML file\n")
+	fmt.Fprintf(os.Stderr, "    --output       Output file (.svg or .html, default: report.svg)\n")
+	fmt.Fprintf(os.Stderr, "    --serve [port] Serve report via HTTP and open browser (default: 8080)\n")
+	fmt.Fprintf(os.Stderr, "  session        Manage evaluation sessions\n")
+	fmt.Fprintf(os.Stderr, "    new            Create new session.yaml\n")
+	fmt.Fprintf(os.Stderr, "    insert         Add entry to session.yaml\n")
 }
 
 // runMix handles the --mix mode: shuffles files from given directories into ./mixed/.
@@ -268,6 +281,100 @@ func runAssessment(args []string) {
 	fmt.Printf("  Valid dirs:     %d\n", validCount)
 	fmt.Printf("  Missing dirs:   %d\n", total-validCount)
 	fmt.Printf("  Correctness:    %.1f%%\n", percentage)
+}
+
+// runSession handles the session subcommand: new or insert.
+func runSession(args []string) {
+	if len(args) < 1 {
+		fmt.Fprintf(os.Stderr, "Error: session requires a subcommand\n")
+		fmt.Fprintf(os.Stderr, "Usage: %s session new\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "       %s session insert -r \"result\" -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
+		os.Exit(1)
+	}
+
+	sub := args[0]
+	switch sub {
+	case "new":
+		sessionNew()
+	case "insert":
+		sessionInsert(args[1:])
+	default:
+		fmt.Fprintf(os.Stderr, "Unknown session subcommand: %s\n", sub)
+		os.Exit(1)
+	}
+}
+
+// runReport handles the --report mode: generates SVG/HTML report from evaluation YAML.
+func runReport(args []string) {
+	if len(args) < 1 {
+		fmt.Fprintf(os.Stderr, "Error: --report requires at least one argument\n")
+		fmt.Fprintf(os.Stderr, "Usage: %s --report <evaluations.yaml> [--output <file>] [--serve [:port]]\n", os.Args[0])
+		os.Exit(1)
+	}
+
+	inputPath := args[0]
+	outputPath := ""
+	serveAddr := ""
+	serveMode := false
+
+	for i := 1; i < len(args); i++ {
+		switch args[i] {
+		case "--output":
+			if i+1 < len(args) {
+				outputPath = args[i+1]
+				i++
+			}
+		case "--serve":
+			serveMode = true
+			if i+1 < len(args) && !strings.HasPrefix(args[i+1], "--") {
+				serveAddr = args[i+1]
+				i++
+			}
+		}
+	}
+
+	eval, err := loadEvaluation(inputPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	var netdata *NetdataMetrics
+	if eval.NetdataFile != "" {
+		netdata, err = loadNetdata(eval.NetdataFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Warning: cannot load netdata file: %v\n", err)
+		}
+	}
+
+	if serveMode {
+		html := generateHTML(eval, netdata)
+		if err := serveHTML(html, serveAddr); err != nil {
+			fmt.Fprintf(os.Stderr, "Error serving report: %v\n", err)
+			os.Exit(1)
+		}
+		return
+	}
+
+	if outputPath == "" {
+		outputPath = "report.svg"
+	}
+
+	if strings.HasSuffix(outputPath, ".html") {
+		html := generateHTML(eval, netdata)
+		if err := os.WriteFile(outputPath, []byte(html), 0644); err != nil {
+			fmt.Fprintf(os.Stderr, "Error writing HTML: %v\n", err)
+			os.Exit(1)
+		}
+	} else {
+		svg := generateSVG(eval, netdata)
+		if err := os.WriteFile(outputPath, []byte(svg), 0644); err != nil {
+			fmt.Fprintf(os.Stderr, "Error writing SVG: %v\n", err)
+			os.Exit(1)
+		}
+	}
+
+	fmt.Printf("Report generated: %s\n", outputPath)
 }
 
 // shuffleFiles randomizes the order of the slice in place.

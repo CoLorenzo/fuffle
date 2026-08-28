@@ -86,6 +86,108 @@ Assessment report for: listing.txt
 
 ---
 
+### `--report` — Generate report
+
+Reads a YAML evaluation file and generates a report (SVG or HTML) with statistics, charts, and system metrics.
+
+```bash
+fuffle --report <evaluations.yaml> [--output <file>] [--serve [:port]]
+```
+
+#### Evaluation file format
+
+```yaml
+title: "My Evaluation"
+extras:
+  - type: text
+    title: "Note"
+    description: "Additional context"
+    body: "This is extra text content"
+  - type: image
+    title: "Chart"
+    description: "Supporting visualization"
+    body: "./img/chart.png"
+netdatafile: "path/to/netdata.csv"
+entries:
+  - file: "mixed/a3x9Bf.png"
+    start_date: 1693123456789    # Unix timestamp in milliseconds
+    end_date: 1693123457890      # Unix timestamp in milliseconds
+    tags:
+      - "prompt1"
+  - file: "mixed/kR7mZ2.pdf"
+    start_date: 1693123470000
+    end_date: 1693123475000
+    tags:
+      - "prompt1"
+```
+
+#### Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Report title |
+| `extras` | []Extra | Extra content cards (text or image) |
+| `netdatafile` | string | Path to netdata monitoring CSV file (optional) |
+| `entries` | []EvaluationEntry | List of evaluation entries |
+
+#### Extra fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | `"text"` or `"image"` |
+| `title` | string | Card title |
+| `description` | string | Short description (optional) |
+| `body` | string | Text content or image path (relative to CWD) |
+
+#### Evaluation entry fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `file` | string | Path to the file being evaluated |
+| `start_date` | int64 | Start timestamp in milliseconds (`date +%s%3N`) |
+| `end_date` | int64 | End timestamp in milliseconds (`date +%s%3N`) |
+| `tags` | []string | Tags for this entry (first tag used for OK/FAIL status) |
+
+#### Netdata file format (CSV)
+
+```csv
+timestamp,cpu,ram,gpu,disk
+1693123456,45.2,1024,78.5,12.3
+1693123457,46.1,1028,79.2,12.5
+```
+
+#### Report contents
+
+1. **Results table** - File, status (OK/FAIL), processing time, tag
+2. **Statistics** - Total files, total time, mean time (+/- SD), median, mode
+3. **Accuracy chart** - Accuracy over time (cumulative)
+4. **System metrics** - If netdata file provided: CPU, RAM, GPU, Disk stats and time chart
+5. **Extras** - Cards with text or image content
+
+#### Output options
+
+- `--output <file.svg>` - Generate SVG file (default: `report.svg`)
+- `--output <file.html>` - Generate HTML file with embedded CSS
+- `--serve [:port]` - Serve report via HTTP and open browser (default port: 8080)
+
+#### Examples
+
+```bash
+# Generate SVG (default)
+fuffle --report evaluation.yaml --output report.svg
+
+# Generate HTML
+fuffle --report evaluation.yaml --output report.html
+
+# Serve and open in browser
+fuffle --report evaluation.yaml --serve
+
+# Serve on custom port
+fuffle --report evaluation.yaml --serve :3000
+```
+
+---
+
 ## Behavior
 
 - **Overwrite mode** (`--mix`): If `mixed/` or `index.yaml` already exist, they are replaced
@@ -104,3 +206,7 @@ go build -o fuffle .
 
 - Go standard library
 - `gopkg.in/yaml.v3` (YAML marshaling)
+
+## Report generation
+
+The `--report` mode generates reports without any external dependencies. SVG is generated directly using Go's standard library. HTML reports include embedded CSS with a clean light-mode design and responsive layout.
