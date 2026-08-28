@@ -20,6 +20,7 @@ type SessionFile struct {
 	Title        string            `yaml:"title,omitempty"`
 	BigfetchFile string            `yaml:"bigfetchfile,omitempty"`
 	NetdataFile  string            `yaml:"netdatafile,omitempty"`
+	Port         string            `yaml:"port,omitempty"`
 	Extras       []Extra           `yaml:"extras,omitempty"`
 	Info         SessionInfo       `yaml:"info,omitempty"`
 	Entries      []EvaluationEntry `yaml:"entries"`
@@ -208,6 +209,50 @@ func sessionEndtime() {
 	}
 
 	fmt.Printf("%d\n", session.Info.Endtime)
+}
+
+func sessionPort(args []string) {
+	session, err := loadSession()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	if len(args) < 1 {
+		if session.Port == "" {
+			fmt.Println("8080")
+		} else {
+			fmt.Println(session.Port)
+		}
+		return
+	}
+
+	port := args[0]
+	if !strings.HasPrefix(port, ":") {
+		port = ":" + port
+	}
+	session.Port = port
+
+	data, err := yaml.Marshal(session)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error marshaling session: %v\n", err)
+		os.Exit(1)
+	}
+
+	if err := os.WriteFile(sessionFile, data, 0644); err != nil {
+		fmt.Fprintf(os.Stderr, "Error writing %s: %v\n", sessionFile, err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Port set to: %s\n", session.Port)
+}
+
+func loadSessionPort() string {
+	session, err := loadSession()
+	if err != nil {
+		return ""
+	}
+	return session.Port
 }
 
 func loadSession() (*SessionFile, error) {

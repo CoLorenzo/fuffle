@@ -83,6 +83,7 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2] [--result \"output\"]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session starttime\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session endtime\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session port [port]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "\nOptions:\n")
 	fmt.Fprintf(os.Stderr, "  --version, -v  Print version\n")
 	fmt.Fprintf(os.Stderr, "  --mix          Shuffle files from directories into ./mixed/ with anonymized names\n")
@@ -95,6 +96,7 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "    insert         Add entry to session.yaml\n")
 	fmt.Fprintf(os.Stderr, "    starttime      Print session start time (date +%s format)\n")
 	fmt.Fprintf(os.Stderr, "    endtime        Print session end time (date +%s format)\n")
+	fmt.Fprintf(os.Stderr, "    port           Get or set serve port\n")
 }
 
 // runMix handles the --mix mode: shuffles files from given directories into ./mixed/.
@@ -300,6 +302,7 @@ func runSession(args []string) {
 		fmt.Fprintf(os.Stderr, "Error: session requires a subcommand\n")
 		fmt.Fprintf(os.Stderr, "Usage: %s session new\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "       %s session insert -r \"result\" -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "       %s session port [port]\n", os.Args[0])
 		os.Exit(1)
 	}
 
@@ -315,6 +318,8 @@ func runSession(args []string) {
 		sessionStarttime()
 	case "endtime":
 		sessionEndtime()
+	case "port":
+		sessionPort(args[1:])
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown session subcommand: %s\n", sub)
 		os.Exit(1)
@@ -373,6 +378,9 @@ func runReport(args []string) {
 	}
 
 	if serveMode {
+		if serveAddr == "" {
+			serveAddr = loadSessionPort()
+		}
 		html := generateHTML(eval, netdata, hardware)
 		resultsHTML := generateResultsHTML(eval)
 		if err := serveHTML(html, resultsHTML, serveAddr); err != nil {
