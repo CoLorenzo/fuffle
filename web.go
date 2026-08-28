@@ -268,6 +268,7 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 
 		r, cx, cy := 60.0, 70.0, 70.0
 		var cumAngle float64
+		b.WriteString(fmt.Sprintf(`<svg width="140" height="140" viewBox="0 0 140 140">`))
 		for i, e := range entries {
 			c := colors[i%len(colors)]
 			angle := e.Pct / 100 * 360
@@ -289,12 +290,13 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 			}
 
 			if len(entries) == 1 {
-				b.WriteString(fmt.Sprintf(`<svg width="140" height="140"><circle cx="%v" cy="%v" r="%v" fill="%s"/></svg>`, cx, cy, r, c))
+				b.WriteString(fmt.Sprintf(`<circle cx="%v" cy="%v" r="%v" fill="%s"/>`, cx, cy, r, c))
 			} else {
-				b.WriteString(fmt.Sprintf(`<svg width="140" height="140"><path d="M%v,%v L%v,%v A%v,%v 0 %d,1 %v,%v Z" fill="%s"/></svg>`,
+				b.WriteString(fmt.Sprintf(`<path d="M%v,%v L%v,%v A%v,%v 0 %d,1 %v,%v Z" fill="%s"/>`,
 					cx, cy, x1, y1, r, r, largeArc, x2, y2, c))
 			}
 		}
+		b.WriteString(`</svg>`)
 		b.WriteString(`</div>
 </div>`)
 	}
