@@ -17,7 +17,7 @@ jobs:
           go-version: "1.24.4"
       - name: Build binary
         run: |
-          CGO_ENABLED=0 go build -ldflags="-s -w" -o fuffle main.go
+          CGO_ENABLED=0 go build -ldflags="-s -w" -o fuffle .
       - name: Create Release and Upload Asset
         uses: softprops/action-gh-release@v2
         with:
