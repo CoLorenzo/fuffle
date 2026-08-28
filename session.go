@@ -146,7 +146,7 @@ func sessionStarttime() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%d\n", session.Info.Starttime/1000)
+	fmt.Printf("%d\n", session.Info.Starttime)
 }
 
 func sessionEndtime() {
@@ -161,7 +161,7 @@ func sessionEndtime() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%d\n", session.Info.Endtime/1000)
+	fmt.Printf("%d\n", session.Info.Endtime)
 }
 
 func loadSession() (*SessionFile, error) {
