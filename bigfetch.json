@@ -1,0 +1,2836 @@
+{
+  "fastfetch": [
+    {
+      "type": "Title",
+      "result": {
+        "userName": "root",
+        "hostName": "debian",
+        "homeDir": "/root/",
+        "exePath": "/usr/bin/fastfetch",
+        "userShell": "/bin/bash"
+      }
+    },
+    {
+      "type": "Separator",
+      "error": "Unsupported for JSON format"
+    },
+    {
+      "type": "OS",
+      "result": {
+        "buildID": "",
+        "codename": "trixie",
+        "id": "debian",
+        "idLike": "",
+        "name": "Debian GNU/Linux",
+        "prettyName": "Debian GNU/Linux 13 (trixie)",
+        "variant": "",
+        "variantID": "",
+        "version": "13.3",
+        "versionID": "13.3"
+      }
+    },
+    {
+      "type": "Host",
+      "result": {
+        "family": "Latitude",
+        "name": "Latitude 5580",
+        "version": "",
+        "sku": "07D1",
+        "vendor": "Dell Inc.",
+        "serial": "JX2B3M2",
+        "uuid": "4c4c4544-0058-3210-8042-cac04f334d32"
+      }
+    },
+    {
+      "type": "Kernel",
+      "result": {
+        "architecture": "x86_64",
+        "name": "Linux",
+        "release": "6.12.63+deb13-amd64",
+        "version": "#1 SMP PREEMPT_DYNAMIC Debian 6.12.63-1 (2025-12-30)",
+        "displayVersion": "",
+        "pageSize": 4096
+      }
+    },
+    {
+      "type": "Uptime",
+      "result": {
+        "uptime": 6467870,
+        "bootTime": "2026-08-28T09:27:55.411+0200"
+      }
+    },
+    {
+      "type": "Packages",
+      "result": {
+        "all": 3496,
+        "amSystem": 0,
+        "amUser": 0,
+        "apk": 0,
+        "brew": 165,
+        "brewCask": 0,
+        "choco": 0,
+        "dpkg": 3320,
+        "emerge": 0,
+        "eopkg": 0,
+        "flatpakSystem": 11,
+        "flatpakUser": 0,
+        "guixSystem": 0,
+        "guixUser": 0,
+        "guixHome": 0,
+        "hpkgSystem": 0,
+        "hpkgUser": 0,
+        "linglong": 0,
+        "mport": 0,
+        "nixDefault": 0,
+        "nixSystem": 0,
+        "nixUser": 0,
+        "opkg": 0,
+        "pacman": 0,
+        "pacstall": 0,
+        "paludis": 0,
+        "pisi": 0,
+        "pkg": 0,
+        "pkgtool": 0,
+        "pkgsrc": 0,
+        "qi": 0,
+        "macports": 0,
+        "rpm": 0,
+        "scoop": 0,
+        "snap": 0,
+        "sorcery": 0,
+        "winget": 0,
+        "xbps": 0,
+        "pacmanBranch": ""
+      }
+    },
+    {
+      "type": "Shell",
+      "result": {
+        "exe": "bash",
+        "exeName": "bash",
+        "exePath": "/usr/bin/bash",
+        "pid": 120291,
+        "ppid": 120290,
+        "processName": "bash",
+        "prettyName": "bash",
+        "version": "5.2.37",
+        "tty": 8
+      }
+    },
+    {
+      "type": "Display",
+      "result": [
+        {
+          "id": 99,
+          "name": "BOE06CB",
+          "primary": false,
+          "output": {
+            "width": 1920,
+            "height": 1080,
+            "refreshRate": 60.0
+          },
+          "scaled": {
+            "width": 0,
+            "height": 0
+          },
+          "preferred": {
+            "width": 1920,
+            "height": 1080,
+            "refreshRate": 60.0
+          },
+          "physical": {
+            "width": 340,
+            "height": 190
+          },
+          "rotation": 0,
+          "bitDepth": 0,
+          "hdrStatus": "Unsupported",
+          "type": "Builtin",
+          "manufactureDate": {
+            "year": 2016,
+            "week": 1
+          },
+          "serial": null,
+          "platformApi": "libdrm"
+        }
+      ]
+    },
+    {
+      "type": "DE",
+      "error": "No DE found"
+    },
+    {
+      "type": "WM",
+      "result": {
+        "processName": "Hyprland",
+        "prettyName": "Hyprland",
+        "protocolName": "X11",
+        "pluginName": "",
+        "version": ""
+      }
+    },
+    {
+      "type": "WMTheme",
+      "error": "Unknown WM: Hyprland"
+    },
+    {
+      "type": "Theme",
+      "error": "No themes found"
+    },
+    {
+      "type": "Icons",
+      "error": "No icons could be found"
+    },
+    {
+      "type": "Font",
+      "error": "No fonts found"
+    },
+    {
+      "type": "Cursor",
+      "result": {
+        "theme": "Adwaita",
+        "size": ""
+      }
+    },
+    {
+      "type": "Terminal",
+      "result": {
+        "processName": "wezterm-gui",
+        "exe": "/usr/bin/wezterm-gui",
+        "exeName": "wezterm-gui",
+        "exePath": "/usr/bin/wezterm-gui",
+        "pid": 6940,
+        "ppid": 6939,
+        "prettyName": "WezTerm",
+        "version": "",
+        "tty": ""
+      }
+    },
+    {
+      "type": "TerminalFont",
+      "result": {
+        "font": {
+          "name": "JetBrains Mono",
+          "size": "",
+          "styles": [],
+          "pretty": "JetBrains Mono"
+        },
+        "fallback": {
+          "name": "",
+          "size": "",
+          "styles": [],
+          "pretty": ""
+        }
+      }
+    },
+    {
+      "type": "CPU",
+      "result": {
+        "cpu": "Intel(R) Core(TM) i5-7440HQ",
+        "vendor": "GenuineIntel",
+        "packages": 1,
+        "cores": {
+          "physical": 4,
+          "logical": 4,
+          "online": 4
+        },
+        "frequency": {
+          "base": 2800,
+          "max": 3800
+        },
+        "coreTypes": [],
+        "temperature": null
+      }
+    },
+    {
+      "type": "GPU",
+      "result": [
+        {
+          "index": null,
+          "coreCount": null,
+          "coreUsage": null,
+          "memory": {
+            "dedicated": {
+              "total": null,
+              "used": null
+            },
+            "shared": {
+              "total": null,
+              "used": null
+            },
+            "type": null
+          },
+          "driver": "i915",
+          "name": "HD Graphics 630",
+          "temperature": null,
+          "type": "Integrated",
+          "vendor": "Intel",
+          "platformApi": "DRM (card0)",
+          "frequency": 1000,
+          "deviceId": 20
+        }
+      ]
+    },
+    {
+      "type": "Memory",
+      "result": {
+        "total": 33537814528,
+        "used": 13093285888
+      }
+    },
+    {
+      "type": "Swap",
+      "result": {
+        "total": 34233905152,
+        "used": 0
+      }
+    },
+    {
+      "type": "Disk",
+      "result": [
+        {
+          "bytes": {
+            "available": 545068056576,
+            "free": 593332121600,
+            "total": 948646043648,
+            "used": 355313922048
+          },
+          "files": {
+            "total": 58900480,
+            "used": 6382779
+          },
+          "filesystem": "ext4",
+          "mountpoint": "/",
+          "mountFrom": "/dev/nvme0n1p2",
+          "name": "",
+          "volumeType": [
+            "Regular"
+          ],
+          "createTime": "2026-02-06T12:18:24.000+0100"
+        },
+        {
+          "bytes": {
+            "available": 1012195328,
+            "free": 1012195328,
+            "total": 1021394944,
+            "used": 9199616
+          },
+          "files": {
+            "total": null,
+            "used": null
+          },
+          "filesystem": "vfat",
+          "mountpoint": "/boot/efi",
+          "mountFrom": "/dev/nvme0n1p1",
+          "name": "",
+          "volumeType": [
+            "Hidden"
+          ],
+          "createTime": null
+        }
+      ]
+    },
+    {
+      "type": "LocalIp",
+      "result": [
+        {
+          "name": "enp0s31f6",
+          "defaultRoute": true,
+          "ipv4": "192.168.0.128/24"
+        }
+      ]
+    },
+    {
+      "type": "Battery",
+      "result": [
+        {
+          "capacity": 100.0,
+          "manufacturer": "BYD",
+          "manufactureDate": "",
+          "modelName": "DELL C7J7005",
+          "status": "AC Connected",
+          "technology": "Li-poly",
+          "serial": "486",
+          "temperature": null,
+          "cycleCount": 0
+        }
+      ]
+    },
+    {
+      "type": "PowerAdapter",
+      "result": []
+    },
+    {
+      "type": "Locale",
+      "result": "en_US.UTF-8"
+    },
+    {
+      "type": "Break",
+      "error": "Unsupported for JSON format"
+    },
+    {
+      "type": "Colors",
+      "error": "Unsupported for JSON format"
+    }
+  ],
+  "inxi": [
+    {
+      "system": "Kernel: 6.12.63+deb13-amd64 arch: x86_64 bits: 64 compiler: gcc v: 14.2.0"
+    },
+    {
+      "system": "Desktop: Hyprland v: N/A dm: SDDM Distro: Debian GNU/Linux 13 (trixie)"
+    },
+    {
+      "system": "Machine:"
+    },
+    {
+      "system": "Type: Laptop System: Dell product: Latitude 5580 v: N/A serial: <filter>"
+    },
+    {
+      "system": "Chassis: type: 10 serial: <filter>"
+    },
+    {
+      "system": "Mobo: Dell model: 0DTP1F v: X02 serial: <filter> part-nu: 07D1 UEFI: Dell"
+    },
+    {
+      "system": "v: 1.39.0 date: 11/06/2024"
+    },
+    {
+      "system": "Battery:"
+    },
+    {
+      "system": "ID-1: BAT0 charge: 46.8 Wh (100.0%) condition: 46.8/68.0 Wh (68.8%)"
+    },
+    {
+      "system": "volts: 8.5 min: 7.6 model: BYD DELL C7J7005 serial: <filter> status: full"
+    },
+    {
+      "system": "CPU:"
+    },
+    {
+      "system": "Info: quad core model: Intel Core i5-7440HQ bits: 64 type: MCP"
+    },
+    {
+      "system": "arch: Kaby Lake rev: 9 cache: L1: 256 KiB L2: 1024 KiB L3: 6 MiB"
+    },
+    {
+      "system": "Speed (MHz): avg: 3544 min/max: 800/3800 cores: 1: 3544 2: 3544 3: 3544"
+    },
+    {
+      "system": "4: 3544 bogomips: 22399"
+    },
+    {
+      "system": "Flags: avx avx2 ht lm nx pae sse sse2 sse3 sse4_1 sse4_2 ssse3 vmx"
+    },
+    {
+      "system": "Graphics:"
+    },
+    {
+      "system": "Device-1: Intel HD Graphics 630 vendor: Dell driver: i915 v: kernel"
+    },
+    {
+      "system": "arch: Gen-9.5 ports: active: eDP-1 empty: DP-1, DP-2, HDMI-A-1, HDMI-A-2,"
+    },
+    {
+      "system": "HDMI-A-3 bus-ID: 00:02.0 chip-ID: 8086:591b"
+    },
+    {
+      "system": "Device-2: Realtek Integrated Webcam_HD driver: uvcvideo type: USB rev: 2.0"
+    },
+    {
+      "system": "speed: 480 Mb/s lanes: 1 bus-ID: 1-11:4 chip-ID: 0bda:5650"
+    },
+    {
+      "system": "Display: unspecified server: X.org v: 1.21.1.16 with: Xwayland v: 24.1.6"
+    },
+    {
+      "system": "compositor: Hyprland driver: X: loaded: modesetting unloaded: fbdev,vesa"
+    },
+    {
+      "system": "dri: iris gpu: i915 display-ID: :1"
+    },
+    {
+      "system": "Monitor-1: eDP-1 model: BOE Display 0x06cb res: 1920x1080 dpi: 142"
+    },
+    {
+      "system": "diag: 395mm (15.5\")"
+    },
+    {
+      "system": "API: EGL v: 1.5 platforms: device: 0 drv: iris device: 1 drv: swrast gbm:"
+    },
+    {
+      "system": "drv: iris surfaceless: drv: iris inactive: wayland,x11"
+    },
+    {
+      "system": "API: OpenGL v: 4.6 compat-v: 4.5 vendor: mesa v: 25.0.7-2+deb13u1"
+    },
+    {
+      "system": "note: incomplete (EGL sourced) renderer: Mesa Intel HD Graphics 630 (KBL"
+    },
+    {
+      "system": "GT2), llvmpipe (LLVM 19.1.7 256 bits)"
+    },
+    {
+      "system": "Info: Tools: api: eglinfo,glxinfo de: kscreen-doctor wl: nwg-displays"
+    },
+    {
+      "system": "x11: xdriinfo, xdpyinfo, xprop, xrandr"
+    },
+    {
+      "system": "Audio:"
+    },
+    {
+      "system": "Device-1: Intel CM238 HD Audio vendor: Dell driver: snd_hda_intel v: kernel"
+    },
+    {
+      "system": "bus-ID: 00:1f.3 chip-ID: 8086:a171"
+    },
+    {
+      "system": "API: ALSA v: k6.12.63+deb13-amd64 status: kernel-api"
+    },
+    {
+      "system": "Server-1: PulseAudio v: 17.0 status: active (root, process)"
+    },
+    {
+      "system": "Network:"
+    },
+    {
+      "system": "Device-1: Intel Ethernet I219-LM vendor: Dell driver: e1000e v: kernel"
+    },
+    {
+      "system": "port: N/A bus-ID: 00:1f.6 chip-ID: 8086:15e3"
+    },
+    {
+      "system": "IF: enp0s31f6 state: up speed: 100 Mbps duplex: full mac: <filter>"
+    },
+    {
+      "system": "Device-2: Intel Wireless 8265 / 8275 driver: iwlwifi v: kernel pcie:"
+    },
+    {
+      "system": "speed: 2.5 GT/s lanes: 1 bus-ID: 01:00.0 chip-ID: 8086:24fd"
+    },
+    {
+      "system": "IF: wlp1s0 state: down mac: <filter>"
+    },
+    {
+      "system": "IF-ID-1: br-810b17db660e state: down mac: <filter>"
+    },
+    {
+      "system": "IF-ID-2: br-mailcow state: up speed: 10000 Mbps duplex: unknown"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-3: docker0 state: down mac: <filter>"
+    },
+    {
+      "system": "IF-ID-4: veth005b598 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-5: veth017f80d state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-6: veth3163c02 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-7: veth320502a state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-8: veth56793b5 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-9: veth57f6bc0 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-10: veth5984aa9 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-11: veth66ff1d5 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-12: veth717771e state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-13: veth9216a98 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-14: veth96a014e state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-15: vethaeeaca4 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-16: vethcdceec8 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-17: vethd1d9cc2 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-18: vethf1d2036 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-19: vethf8b9c66 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-20: vethfde65f9 state: up speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "IF-ID-21: ztyxa4ae4d state: unknown speed: 10000 Mbps duplex: full"
+    },
+    {
+      "system": "mac: <filter>"
+    },
+    {
+      "system": "Bluetooth:"
+    },
+    {
+      "system": "Device-1: Intel Bluetooth wireless interface driver: btusb v: 0.8 type: USB"
+    },
+    {
+      "system": "rev: 2.0 speed: 12 Mb/s lanes: 1 bus-ID: 1-6:2 chip-ID: 8087:0a2b"
+    },
+    {
+      "system": "Report: hciconfig ID: hci0 rfk-id: 0 state: up address: <filter> bt-v: 4.2"
+    },
+    {
+      "system": "lmp-v: 8 sub-v: 100"
+    },
+    {
+      "system": "Drives:"
+    },
+    {
+      "system": "Local Storage: total: 931.51 GiB used: 330.92 GiB (35.5%)"
+    },
+    {
+      "system": "ID-1: /dev/nvme0n1 vendor: Samsung model: SSD 980 PRO 1TB size: 931.51 GiB"
+    },
+    {
+      "system": "speed: 63.2 Gb/s lanes: 4 serial: <filter> temp: 27.9 C"
+    },
+    {
+      "system": "Partition:"
+    },
+    {
+      "system": "ID-1: / size: 883.5 GiB used: 330.91 GiB (37.5%) fs: ext4"
+    },
+    {
+      "system": "dev: /dev/nvme0n1p2"
+    },
+    {
+      "system": "ID-2: /boot/efi size: 974.1 MiB used: 8.8 MiB (0.9%) fs: vfat"
+    },
+    {
+      "system": "dev: /dev/nvme0n1p1"
+    },
+    {
+      "system": "Swap:"
+    },
+    {
+      "system": "ID-1: swap-1 type: partition size: 31.88 GiB used: 0 KiB (0.0%) priority: -2"
+    },
+    {
+      "system": "dev: /dev/nvme0n1p3"
+    },
+    {
+      "system": "Sensors:"
+    },
+    {
+      "system": "System Temperatures: cpu: 0.0 C pch: 38.5 C mobo: 53.0 C"
+    },
+    {
+      "system": "Fan Speeds (rpm): cpu: 4288"
+    },
+    {
+      "system": "Info:"
+    },
+    {
+      "system": "Memory: total: 32 GiB available: 31.23 GiB used: 12.25 GiB (39.2%)"
+    },
+    {
+      "system": "igpu: 32 MiB"
+    },
+    {
+      "system": "Processes: 456 Power: uptime: 1h 47m wakeups: 0 Init: systemd v: 257"
+    },
+    {
+      "system": "default: graphical"
+    },
+    {
+      "system": "Packages: 3331 pm: dpkg pkgs: 3320 pm: flatpak pkgs: 11 Compilers:"
+    },
+    {
+      "system": "clang: 19.1.7 gcc: 14.2.0 Shell: Bash v: 5.2.37 running-in: wezterm-gui"
+    },
+    {
+      "system": "inxi: 3.3.38"
+    }
+  ],
+  "dmidecode": [
+    {
+      "handle": "0x0000",
+      "type": 0,
+      "bytes": 24,
+      "description": "BIOS Information",
+      "values": {
+        "vendor": "Dell Inc.",
+        "version": "1.39.0",
+        "release_date": "11/06/2024",
+        "address": "0xF0000",
+        "runtime_size": "64 kB",
+        "rom_size": "16 MB",
+        "characteristics": [
+          "PCI is supported",
+          "PNP is supported",
+          "BIOS is upgradeable",
+          "BIOS shadowing is allowed",
+          "Boot from CD is supported",
+          "Selectable boot is supported",
+          "EDD is supported",
+          "Japanese floppy for NEC 9800 1.2 MB is supported (int 13h)",
+          "5.25\"/1.2 MB floppy services are supported (int 13h)",
+          "3.5\"/720 kB floppy services are supported (int 13h)",
+          "3.5\"/2.88 MB floppy services are supported (int 13h)",
+          "Print screen service is supported (int 5h)",
+          "8042 keyboard services are supported (int 9h)",
+          "Serial services are supported (int 14h)",
+          "Printer services are supported (int 17h)",
+          "ACPI is supported",
+          "USB legacy is supported",
+          "Smart battery is supported",
+          "BIOS boot specification is supported",
+          "Function key-initiated network boot is supported",
+          "Targeted content distribution is supported",
+          "UEFI is supported"
+        ],
+        "bios_revision": "1.39"
+      }
+    },
+    {
+      "handle": "0x0001",
+      "type": 1,
+      "bytes": 27,
+      "description": "System Information",
+      "values": {
+        "manufacturer": "Dell Inc.",
+        "product_name": "Latitude 5580",
+        "version": "Not Specified",
+        "serial_number": "JX2B3M2",
+        "uuid": "4c4c4544-0058-3210-8042-cac04f334d32",
+        "wake-up_type": "Power Switch",
+        "sku_number": "07D1",
+        "family": "Latitude"
+      }
+    },
+    {
+      "handle": "0x0002",
+      "type": 2,
+      "bytes": 15,
+      "description": "Base Board Information",
+      "values": {
+        "manufacturer": "Dell Inc.",
+        "product_name": "0DTP1F",
+        "version": "X02",
+        "serial_number": "/JX2B3M2/CN129637BU001C/",
+        "asset_tag": "Not Specified",
+        "features": [
+          "Board is a hosting board",
+          "Board is replaceable"
+        ],
+        "location_in_chassis": "Not Specified",
+        "chassis_handle": "0x0300",
+        "type": "Motherboard",
+        "contained_object_handles": "0"
+      }
+    },
+    {
+      "handle": "0x0003",
+      "type": 3,
+      "bytes": 22,
+      "description": "Chassis Information",
+      "values": {
+        "manufacturer": "Dell Inc.",
+        "type": "Notebook",
+        "lock": "Not Present",
+        "version": "Not Specified",
+        "serial_number": "JX2B3M2",
+        "asset_tag": "Not Specified",
+        "boot-up_state": "Safe",
+        "power_supply_state": "Safe",
+        "thermal_state": "Safe",
+        "security_status": "None",
+        "oem_information": "0x00000000",
+        "height": "Unspecified",
+        "number_of_power_cords": "1",
+        "contained_elements": "0",
+        "sku_number": "Notebook"
+      }
+    },
+    {
+      "handle": "0x0004",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JDOCK1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "DOCK",
+        "external_connector_type": "Other",
+        "port_type": "None"
+      }
+    },
+    {
+      "handle": "0x0005",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JCRT1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "CRT",
+        "external_connector_type": "Other",
+        "port_type": "Video Port"
+      }
+    },
+    {
+      "handle": "0x0006",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JHDMI",
+        "internal_connector_type": "None",
+        "external_reference_designator": "HDMI",
+        "external_connector_type": "Other",
+        "port_type": "Video Port"
+      }
+    },
+    {
+      "handle": "0x0007",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JSD1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Cardreader",
+        "external_connector_type": "Other",
+        "port_type": "None"
+      }
+    },
+    {
+      "handle": "0x0008",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JLOM1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Network",
+        "external_connector_type": "RJ-45",
+        "port_type": "Network Port"
+      }
+    },
+    {
+      "handle": "0x0009",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JUSB1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "USB1",
+        "external_connector_type": "Access Bus (USB)",
+        "port_type": "USB"
+      }
+    },
+    {
+      "handle": "0x000A",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JUSB2",
+        "internal_connector_type": "None",
+        "external_reference_designator": "USB2",
+        "external_connector_type": "Access Bus (USB)",
+        "port_type": "USB"
+      }
+    },
+    {
+      "handle": "0x000B",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JUSB3",
+        "internal_connector_type": "None",
+        "external_reference_designator": "USB3",
+        "external_connector_type": "Access Bus (USB)",
+        "port_type": "USB"
+      }
+    },
+    {
+      "handle": "0x000C",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JHP1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Audio Jack",
+        "external_connector_type": "Mini Jack (headphones)",
+        "port_type": "Audio Port"
+      }
+    },
+    {
+      "handle": "0x000D",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JSIM1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "SIM Card",
+        "external_connector_type": "Other",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x000E",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JEDP1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Camera",
+        "external_connector_type": "Other",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x000F",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JFP1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Finger Print sensor",
+        "external_connector_type": "Other",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0010",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JSC1",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Smart Card",
+        "external_connector_type": "Other",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0011",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JeDP1 - eDP",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0012",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JNGFF1 - WLAN/BT/Wigig CONN",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0013",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JNGFF2 - WLAN/LTE CONN",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0014",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JNGFF3 - HDD",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0015",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JKBTP1 - Keyboard",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Keyboard Port"
+      }
+    },
+    {
+      "handle": "0x0016",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JFAN1 - CPU FAN",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0017",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JUSH1 - USH CONN",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0018",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JSPK1 - Speaker",
+        "internal_connector_type": "Mini Jack (headphones)",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Audio Port"
+      }
+    },
+    {
+      "handle": "0x0019",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JXDP1 - CPU XDP Port",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x001A",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JAPS1 - Automatic Power",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x001B",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JSPI1 - SPI PORT",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x001C",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JLPDE1 - 80 PORT",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x001D",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JDEG1 - Debug PORT",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x001E",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JLED1 - LED",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x001F",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JRTC1 - RTC",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0020",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JCS1 - RFID/NFC",
+        "internal_connector_type": "None",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "Other"
+      }
+    },
+    {
+      "handle": "0x0021",
+      "type": 8,
+      "bytes": 9,
+      "description": "Port Connector Information",
+      "values": {
+        "internal_reference_designator": "JSATA1 - SATA3 CONN",
+        "internal_connector_type": "SAS/SATA Plug Receptacle",
+        "external_reference_designator": "Not Specified",
+        "external_connector_type": "None",
+        "port_type": "SATA"
+      }
+    },
+    {
+      "handle": "0x0022",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot1",
+        "type": "PCI Express",
+        "data_bus_width": "16x or x16",
+        "current_usage": "In Use",
+        "length": "Long",
+        "id": "0",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.0"
+      }
+    },
+    {
+      "handle": "0x0023",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot2",
+        "type": "PCI Express",
+        "data_bus_width": "1x or x1",
+        "current_usage": "Available",
+        "length": "Short",
+        "id": "1",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.1"
+      }
+    },
+    {
+      "handle": "0x0024",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot3",
+        "type": "PCI Express",
+        "data_bus_width": "1x or x1",
+        "current_usage": "In Use",
+        "length": "Short",
+        "id": "2",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.2"
+      }
+    },
+    {
+      "handle": "0x0025",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot4",
+        "type": "PCI Express",
+        "data_bus_width": "1x or x1",
+        "current_usage": "Available",
+        "length": "Short",
+        "id": "3",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.3"
+      }
+    },
+    {
+      "handle": "0x0026",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot5",
+        "type": "PCI Express",
+        "data_bus_width": "1x or x1",
+        "current_usage": "Available",
+        "length": "Short",
+        "id": "4",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.4"
+      }
+    },
+    {
+      "handle": "0x0027",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot6",
+        "type": "PCI Express",
+        "data_bus_width": "1x or x1",
+        "current_usage": "Available",
+        "length": "Short",
+        "id": "5",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.5"
+      }
+    },
+    {
+      "handle": "0x0028",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot7",
+        "type": "PCI Express",
+        "data_bus_width": "1x or x1",
+        "current_usage": "Available",
+        "length": "Short",
+        "id": "6",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.6"
+      }
+    },
+    {
+      "handle": "0x0029",
+      "type": 9,
+      "bytes": 17,
+      "description": "System Slot Information",
+      "values": {
+        "designation": "Slot8",
+        "type": "PCI",
+        "data_bus_width": "32 bit",
+        "current_usage": "Available",
+        "length": "Short",
+        "id": "7",
+        "characteristics": [
+          "3.3 V is provided",
+          "Opening is shared",
+          "PME signal is supported"
+        ],
+        "bus_address": "0000:00:1c.7"
+      }
+    },
+    {
+      "handle": "0x002A",
+      "type": 10,
+      "bytes": 6,
+      "description": "On Board Device Information",
+      "values": {
+        "type": "Video",
+        "status": "Enabled",
+        "description": "\"Intel HD Graphics\""
+      }
+    },
+    {
+      "handle": "0x002B",
+      "type": 11,
+      "bytes": 5,
+      "description": "OEM Strings",
+      "values": {
+        "string_1": "Dell System",
+        "string_2": "1[07D1]",
+        "string_3": "3[1.0]",
+        "string_4": "12[www.dell.com]",
+        "string_5": "14[1]",
+        "string_6": "15[0]",
+        "string_7": "27[43358125322]"
+      }
+    },
+    {
+      "handle": "0x002C",
+      "type": 12,
+      "bytes": 5,
+      "description": "System Configuration Options",
+      "values": {
+        "option_1": "Default string"
+      }
+    },
+    {
+      "handle": "0x002D",
+      "type": 15,
+      "bytes": 35,
+      "description": "System Event Log",
+      "values": {
+        "area_length": "4 bytes",
+        "header_start_offset": "0x0000",
+        "header_length": "2 bytes",
+        "data_start_offset": "0x0002",
+        "access_method": "Indexed I/O, one 16-bit index port, one 8-bit data port",
+        "access_address": "Index 0x046A, Data 0x046C",
+        "status": "Invalid, Not Full",
+        "change_token": "0x00000000",
+        "header_format": "No Header",
+        "supported_log_type_descriptors": "6",
+        "descriptor_1": "End of log",
+        "data_format_1": "OEM-specific",
+        "descriptor_2": "End of log",
+        "data_format_2": "OEM-specific",
+        "descriptor_3": "End of log",
+        "data_format_3": "OEM-specific",
+        "descriptor_4": "End of log",
+        "data_format_4": "OEM-specific",
+        "descriptor_5": "End of log",
+        "data_format_5": "OEM-specific",
+        "descriptor_6": "End of log",
+        "data_format_6": "OEM-specific"
+      }
+    },
+    {
+      "handle": "0x002E",
+      "type": 21,
+      "bytes": 7,
+      "description": "Built-in Pointing Device",
+      "values": {
+        "type": "Touch Pad",
+        "interface": "Bus Mouse",
+        "buttons": "2"
+      }
+    },
+    {
+      "handle": "0x0033",
+      "type": 25,
+      "bytes": 9,
+      "description": "System Power Controls",
+      "values": {
+        "next_scheduled_power-on": "*-* 00:00:00"
+      }
+    },
+    {
+      "handle": "0x0034",
+      "type": 32,
+      "bytes": 20,
+      "description": "System Boot Information",
+      "values": {
+        "status": "No errors detected"
+      }
+    },
+    {
+      "handle": "0x0035",
+      "type": 34,
+      "bytes": 11,
+      "description": "Management Device",
+      "values": {
+        "description": "LM78-1",
+        "type": "LM78",
+        "address": "0x00000000",
+        "address_type": "I/O Port"
+      }
+    },
+    {
+      "handle": "0x0037",
+      "type": 36,
+      "bytes": 16,
+      "description": "Management Device Threshold Data",
+      "values": {
+        "lower_non-critical_threshold": "1",
+        "upper_non-critical_threshold": "2",
+        "lower_critical_threshold": "3",
+        "upper_critical_threshold": "4",
+        "lower_non-recoverable_threshold": "5",
+        "upper_non-recoverable_threshold": "6"
+      }
+    },
+    {
+      "handle": "0x0039",
+      "type": 36,
+      "bytes": 16,
+      "description": "Management Device Threshold Data",
+      "values": {
+        "lower_non-critical_threshold": "1",
+        "upper_non-critical_threshold": "2",
+        "lower_critical_threshold": "3",
+        "upper_critical_threshold": "4",
+        "lower_non-recoverable_threshold": "5",
+        "upper_non-recoverable_threshold": "6"
+      }
+    },
+    {
+      "handle": "0x003B",
+      "type": 36,
+      "bytes": 16,
+      "description": "Management Device Threshold Data",
+      "values": null
+    },
+    {
+      "handle": "0x0041",
+      "type": 41,
+      "bytes": 11,
+      "description": "Onboard Device",
+      "values": {
+        "reference_designation": "Onboard IGD",
+        "type": "Video",
+        "status": "Enabled",
+        "type_instance": "1",
+        "bus_address": "0000:00:02.0"
+      }
+    },
+    {
+      "handle": "0x0042",
+      "type": 41,
+      "bytes": 11,
+      "description": "Onboard Device",
+      "values": {
+        "reference_designation": "Onboard LAN",
+        "type": "Ethernet",
+        "status": "Enabled",
+        "type_instance": "1",
+        "bus_address": "0000:00:19.0"
+      }
+    },
+    {
+      "handle": "0x0043",
+      "type": 41,
+      "bytes": 11,
+      "description": "Onboard Device",
+      "values": {
+        "reference_designation": "Onboard 1394",
+        "type": "Other",
+        "status": "Enabled",
+        "type_instance": "1",
+        "bus_address": "0000:03:1c.2"
+      }
+    },
+    {
+      "handle": "0x0044",
+      "type": 255,
+      "bytes": 8,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "FF 08 44 00 01 02 00 00"
+        ],
+        "strings": [
+          "_SIDDHnUCGkcqVBV",
+          "07D1",
+          "_SIDAvf90w7wKZiZ",
+          "DELL"
+        ]
+      }
+    },
+    {
+      "handle": "0x0045",
+      "type": 16,
+      "bytes": 23,
+      "description": "Physical Memory Array",
+      "values": {
+        "location": "System Board Or Motherboard",
+        "use": "System Memory",
+        "error_correction_type": "None",
+        "maximum_capacity": "32 GB",
+        "error_information_handle": "Not Provided",
+        "number_of_devices": "2"
+      }
+    },
+    {
+      "handle": "0x0046",
+      "type": 17,
+      "bytes": 40,
+      "description": "Memory Device",
+      "values": {
+        "array_handle": "0x0045",
+        "error_information_handle": "Not Provided",
+        "total_width": "64 bits",
+        "data_width": "64 bits",
+        "size": "16 GB",
+        "form_factor": "SODIMM",
+        "set": "None",
+        "locator": "DIMM A",
+        "bank_locator": "BANK 0",
+        "type": "DDR4",
+        "type_detail": "Synchronous Unbuffered (Unregistered)",
+        "speed": "3200 MT/s",
+        "manufacturer": "859B0000802C",
+        "serial_number": "E77ADC2B",
+        "asset_tag": "1A230300",
+        "part_number": "CT16G4SFRA32A.C8FF",
+        "rank": "1",
+        "configured_memory_speed": "2400 MT/s",
+        "minimum_voltage": "1.2 V",
+        "maximum_voltage": "1.2 V",
+        "configured_voltage": "1.2 V"
+      }
+    },
+    {
+      "handle": "0x0047",
+      "type": 17,
+      "bytes": 40,
+      "description": "Memory Device",
+      "values": {
+        "array_handle": "0x0045",
+        "error_information_handle": "Not Provided",
+        "total_width": "64 bits",
+        "data_width": "64 bits",
+        "size": "16 GB",
+        "form_factor": "SODIMM",
+        "set": "None",
+        "locator": "DIMM B",
+        "bank_locator": "BANK 2",
+        "type": "DDR4",
+        "type_detail": "Synchronous Unbuffered (Unregistered)",
+        "speed": "3200 MT/s",
+        "manufacturer": "859B0000802C",
+        "serial_number": "E77A961B",
+        "asset_tag": "1A230300",
+        "part_number": "CT16G4SFRA32A.C8FF",
+        "rank": "1",
+        "configured_memory_speed": "2400 MT/s",
+        "minimum_voltage": "1.2 V",
+        "maximum_voltage": "1.2 V",
+        "configured_voltage": "1.2 V"
+      }
+    },
+    {
+      "handle": "0x0048",
+      "type": 19,
+      "bytes": 31,
+      "description": "Memory Array Mapped Address",
+      "values": {
+        "starting_address": "0x00000000000",
+        "ending_address": "0x007FFFFFFFF",
+        "range_size": "32 GB",
+        "physical_array_handle": "0x0045",
+        "partition_width": "2"
+      }
+    },
+    {
+      "handle": "0x0049",
+      "type": 7,
+      "bytes": 19,
+      "description": "Cache Information",
+      "values": {
+        "socket_designation": "L1 Cache",
+        "configuration": "Enabled, Not Socketed, Level 1",
+        "operational_mode": "Write Back",
+        "location": "Internal",
+        "installed_size": "256 kB",
+        "maximum_size": "256 kB",
+        "supported_sram_types": [
+          "Synchronous"
+        ],
+        "installed_sram_type": "Synchronous",
+        "speed": "Unknown",
+        "error_correction_type": "Parity",
+        "system_type": "Unified",
+        "associativity": "8-way Set-associative"
+      }
+    },
+    {
+      "handle": "0x004A",
+      "type": 7,
+      "bytes": 19,
+      "description": "Cache Information",
+      "values": {
+        "socket_designation": "L2 Cache",
+        "configuration": "Enabled, Not Socketed, Level 2",
+        "operational_mode": "Write Back",
+        "location": "Internal",
+        "installed_size": "1 MB",
+        "maximum_size": "1 MB",
+        "supported_sram_types": [
+          "Synchronous"
+        ],
+        "installed_sram_type": "Synchronous",
+        "speed": "Unknown",
+        "error_correction_type": "Single-bit ECC",
+        "system_type": "Unified",
+        "associativity": "4-way Set-associative"
+      }
+    },
+    {
+      "handle": "0x004B",
+      "type": 7,
+      "bytes": 19,
+      "description": "Cache Information",
+      "values": {
+        "socket_designation": "L3 Cache",
+        "configuration": "Enabled, Not Socketed, Level 3",
+        "operational_mode": "Write Back",
+        "location": "Internal",
+        "installed_size": "6 MB",
+        "maximum_size": "6 MB",
+        "supported_sram_types": [
+          "Synchronous"
+        ],
+        "installed_sram_type": "Synchronous",
+        "speed": "Unknown",
+        "error_correction_type": "Multi-bit ECC",
+        "system_type": "Unified",
+        "associativity": "12-way Set-associative"
+      }
+    },
+    {
+      "handle": "0x004C",
+      "type": 4,
+      "bytes": 48,
+      "description": "Processor Information",
+      "values": {
+        "socket_designation": "U3E1",
+        "type": "Central Processor",
+        "family": "Core i5",
+        "manufacturer": "Intel(R) Corporation",
+        "id": "E9 06 09 00 FF FB EB BF",
+        "signature": "Type 0, Family 6, Model 158, Stepping 9",
+        "flags": [
+          "FPU (Floating-point unit on-chip)",
+          "VME (Virtual mode extension)",
+          "DE (Debugging extension)",
+          "PSE (Page size extension)",
+          "TSC (Time stamp counter)",
+          "MSR (Model specific registers)",
+          "PAE (Physical address extension)",
+          "MCE (Machine check exception)",
+          "CX8 (CMPXCHG8 instruction supported)",
+          "APIC (On-chip APIC hardware supported)",
+          "SEP (Fast system call)",
+          "MTRR (Memory type range registers)",
+          "PGE (Page global enable)",
+          "MCA (Machine check architecture)",
+          "CMOV (Conditional move instruction supported)",
+          "PAT (Page attribute table)",
+          "PSE-36 (36-bit page size extension)",
+          "CLFSH (CLFLUSH instruction supported)",
+          "DS (Debug store)",
+          "ACPI (ACPI supported)",
+          "MMX (MMX technology supported)",
+          "FXSR (FXSAVE and FXSTOR instructions supported)",
+          "SSE (Streaming SIMD extensions)",
+          "SSE2 (Streaming SIMD extensions 2)",
+          "SS (Self-snoop)",
+          "HTT (Multi-threading)",
+          "TM (Thermal monitor supported)",
+          "PBE (Pending break enabled)"
+        ],
+        "version": "Intel(R) Core(TM) i5-7440HQ CPU @ 2.80GHz",
+        "voltage": "0.8 V",
+        "external_clock": "100 MHz",
+        "max_speed": "3800 MHz",
+        "current_speed": "2300 MHz",
+        "status": "Populated, Enabled",
+        "upgrade": "Other",
+        "l1_cache_handle": "0x0049",
+        "l2_cache_handle": "0x004A",
+        "l3_cache_handle": "0x004B",
+        "serial_number": "To Be Filled By O.E.M.",
+        "asset_tag": "To Be Filled By O.E.M.",
+        "part_number": "To Be Filled By O.E.M.",
+        "core_count": "4",
+        "core_enabled": "4",
+        "thread_count": "4",
+        "characteristics": [
+          "64-bit capable",
+          "Multi-Core",
+          "Execute Protection",
+          "Enhanced Virtualization",
+          "Power/Performance Control"
+        ]
+      }
+    },
+    {
+      "handle": "0x004D",
+      "type": 20,
+      "bytes": 35,
+      "description": "Memory Device Mapped Address",
+      "values": {
+        "starting_address": "0x00000000000",
+        "ending_address": "0x003FFFFFFFF",
+        "range_size": "16 GB",
+        "physical_device_handle": "0x0046",
+        "memory_array_mapped_address_handle": "0x0048",
+        "partition_row_position": "1",
+        "interleave_position": "1",
+        "interleaved_data_depth": "1"
+      }
+    },
+    {
+      "handle": "0x004E",
+      "type": 20,
+      "bytes": 35,
+      "description": "Memory Device Mapped Address",
+      "values": {
+        "starting_address": "0x00400000000",
+        "ending_address": "0x007FFFFFFFF",
+        "range_size": "16 GB",
+        "physical_device_handle": "0x0047",
+        "memory_array_mapped_address_handle": "0x0048",
+        "partition_row_position": "1",
+        "interleave_position": "2",
+        "interleaved_data_depth": "1"
+      }
+    },
+    {
+      "handle": "0x0300",
+      "type": 126,
+      "bytes": 22,
+      "description": "Inactive",
+      "values": null
+    },
+    {
+      "handle": "0x1600",
+      "type": 22,
+      "bytes": 26,
+      "description": "Portable Battery",
+      "values": {
+        "location": "Sys. Battery Bay",
+        "manufacturer": "BYD",
+        "manufacture_date": "05/14/2020",
+        "serial_number": "01E6",
+        "name": "DELL C7J7005",
+        "design_capacity": "67990 mWh",
+        "design_voltage": "7600 mV",
+        "sbds_version": "1.0",
+        "maximum_error": "2%",
+        "sbds_chemistry": "LiP",
+        "oem-specific_information": "0x00000801"
+      }
+    },
+    {
+      "handle": "0x1B00",
+      "type": 27,
+      "bytes": 15,
+      "description": "Cooling Device",
+      "values": {
+        "temperature_probe_handle": "0x1C00",
+        "type": "Chip Fan",
+        "status": "OK",
+        "oem-specific_information": "0x0000DD00",
+        "nominal_speed": "6000 rpm",
+        "description": "CPU Fan"
+      }
+    },
+    {
+      "handle": "0x1C00",
+      "type": 28,
+      "bytes": 22,
+      "description": "Temperature Probe",
+      "values": {
+        "description": "CPU Probe",
+        "location": "Motherboard",
+        "status": "OK",
+        "maximum_value": "127.0 deg C",
+        "minimum_value": "-127.0 deg C",
+        "resolution": "1.000 deg C",
+        "tolerance": "Unknown",
+        "accuracy": "Unknown",
+        "oem-specific_information": "0x0000DC00",
+        "nominal_value": "10.0 deg C"
+      }
+    },
+    {
+      "handle": "0x1C01",
+      "type": 28,
+      "bytes": 22,
+      "description": "Temperature Probe",
+      "values": {
+        "description": "True Ambient",
+        "location": "Motherboard",
+        "status": "OK",
+        "maximum_value": "127.0 deg C",
+        "minimum_value": "-127.0 deg C",
+        "resolution": "1.000 deg C",
+        "tolerance": "Unknown",
+        "accuracy": "Unknown",
+        "oem-specific_information": "0x0000DC01",
+        "nominal_value": "10.0 deg C"
+      }
+    },
+    {
+      "handle": "0x1C02",
+      "type": 28,
+      "bytes": 22,
+      "description": "Temperature Probe",
+      "values": {
+        "description": "Memory Module",
+        "location": "Motherboard",
+        "status": "OK",
+        "maximum_value": "127.0 deg C",
+        "minimum_value": "-127.0 deg C",
+        "resolution": "1.000 deg C",
+        "tolerance": "Unknown",
+        "accuracy": "Unknown",
+        "oem-specific_information": "0x0000DC02",
+        "nominal_value": "10.0 deg C"
+      }
+    },
+    {
+      "handle": "0x1C03",
+      "type": 28,
+      "bytes": 22,
+      "description": "Temperature Probe",
+      "values": {
+        "description": "Other Probe",
+        "location": "Processor",
+        "status": "OK",
+        "maximum_value": "127.0 deg C",
+        "minimum_value": "-127.0 deg C",
+        "resolution": "1.000 deg C",
+        "tolerance": "Unknown",
+        "accuracy": "Unknown",
+        "oem-specific_information": "0x0000DC03",
+        "nominal_value": "10.0 deg C"
+      }
+    },
+    {
+      "handle": "0xB100",
+      "type": 177,
+      "bytes": 12,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "B1 0C 00 B1 1A 00 00 00 00 00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xB200",
+      "type": 178,
+      "bytes": 88,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "B2 58 00 B2 3D 00 0C 00 3C 00 0A 00 3B 00 0B 00",
+          "0A 01 12 00 52 00 20 00 30 00 24 00 42 00 18 00",
+          "58 00 14 00 57 00 13 00 10 00 FF 00 11 00 FF 00",
+          "12 00 FF 00 13 00 FF 00 14 00 FF 00 1E 00 FF 00",
+          "1F 00 FF 00 20 00 FF 00 21 00 FF 00 22 00 FF 00",
+          "50 01 26 00 44 00 16 00"
+        ],
+        "strings": [
+          ""
+        ]
+      }
+    },
+    {
+      "handle": "0xD000",
+      "type": 208,
+      "bytes": 16,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "D0 10 00 D0 03 11 FE 00 D1 07 01 02 00 00 00 00"
+        ],
+        "strings": [
+          "20171129",
+          "20171218"
+        ]
+      }
+    },
+    {
+      "handle": "0xD800",
+      "type": 216,
+      "bytes": 9,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "D8 09 00 D8 01 02 01 88 00"
+        ],
+        "strings": [
+          "\"Intel Corp.\"",
+          "\"1001\""
+        ]
+      }
+    },
+    {
+      "handle": "0xD900",
+      "type": 217,
+      "bytes": 8,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "D9 08 00 D9 01 02 01 03"
+        ],
+        "strings": [
+          "US-101",
+          "Proprietary"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA00",
+      "type": 218,
+      "bytes": 251,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA FB 00 DA B2 00 04 FF 1F B6 40 1E 00 1E 00 00",
+          "00 22 00 22 00 01 00 23 00 23 00 00 00 28 00 28",
+          "00 00 00 29 00 29 00 01 00 2A 00 2A 00 02 00 2B",
+          "00 2B 00 FF FF 2C 00 2C 00 FF FF 2D 00 2D 00 02",
+          "00 2E 00 2E 00 00 00 42 00 42 00 01 00 43 00 43",
+          "00 00 00 50 00 50 00 01 00 55 00 55 00 00 00 5C",
+          "00 5C 00 01 00 5D 00 5D 00 00 00 65 00 65 00 00",
+          "00 66 00 66 00 01 00 6D 00 6D 00 05 00 6E 00 6E",
+          "00 01 00 7D 00 7D 00 FF FF 93 00 93 00 01 00 94",
+          "00 94 00 00 00 9B 00 9B 00 01 00 9C 00 9C 00 00",
+          "00 9F 00 9F 00 00 00 A0 00 A0 00 01 00 A1 00 A1",
+          "00 00 00 A3 00 A3 00 01 00 EA 00 EA 00 00 00 EB",
+          "00 EB 00 01 00 EC 00 EC 00 02 00 ED 00 ED 00 00",
+          "00 F0 00 F0 00 01 00 F1 00 F1 00 00 00 F2 00 F2",
+          "00 01 00 F3 00 F3 00 02 00 09 01 09 01 00 00 0E",
+          "01 0E 01 01 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA01",
+      "type": 218,
+      "bytes": 251,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA FB 01 DA B2 00 04 FF 1F B6 40 0F 01 0F 01 00",
+          "00 10 01 10 01 01 00 11 01 11 01 00 00 17 01 17",
+          "01 00 00 18 01 18 01 01 00 1B 01 1B 01 00 00 1C",
+          "01 1C 01 01 00 1F 01 1F 01 00 00 20 01 20 01 01",
+          "00 2B 01 2B 01 01 00 2C 01 2C 01 00 00 2D 01 2D",
+          "01 01 00 2E 01 2E 01 00 00 35 01 35 01 FF 00 38",
+          "01 38 01 01 00 39 01 39 01 02 00 40 01 40 01 00",
+          "00 41 01 41 01 01 00 44 01 44 01 00 00 45 01 45",
+          "01 01 00 46 01 46 01 00 00 47 01 47 01 01 00 4A",
+          "01 4A 01 00 00 4B 01 4B 01 01 00 4C 01 4C 01 01",
+          "00 4D 01 4D 01 00 00 52 01 52 01 01 00 53 01 53",
+          "01 00 00 75 01 75 01 02 00 76 01 76 01 01 00 7B",
+          "01 7B 01 00 00 7C 01 7C 01 01 00 7F 01 7F 01 00",
+          "00 80 01 80 01 01 00 81 01 81 01 00 00 82 01 82",
+          "01 01 00 83 01 83 01 00 00 84 01 84 01 01 00 89",
+          "01 89 01 00 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA02",
+      "type": 218,
+      "bytes": 251,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA FB 02 DA B2 00 04 FF 1F B6 40 8A 01 8A 01 01",
+          "00 93 01 93 01 00 00 94 01 94 01 01 00 98 01 98",
+          "01 04 00 9B 01 9B 01 00 00 9C 01 9C 01 01 00 DE",
+          "01 DE 01 00 00 DF 01 DF 01 01 00 E1 01 E1 01 00",
+          "00 E2 01 E2 01 01 00 E3 01 E3 01 02 00 E8 01 E8",
+          "01 00 00 E9 01 E9 01 01 00 EA 01 EA 01 00 00 EB",
+          "01 EB 01 01 00 02 02 02 02 00 00 03 02 03 02 01",
+          "00 04 02 04 02 00 00 05 02 05 02 01 00 16 02 16",
+          "02 06 00 2D 02 2D 02 01 00 2E 02 2E 02 00 00 32",
+          "02 32 02 02 00 33 02 33 02 01 00 35 02 35 02 01",
+          "00 36 02 36 02 00 00 4A 02 4A 02 01 00 4B 02 4B",
+          "02 01 00 4C 02 4C 02 00 00 64 02 64 02 01 00 65",
+          "02 65 02 00 00 66 02 66 02 01 00 67 02 67 02 00",
+          "00 68 02 68 02 01 00 69 02 69 02 00 00 6C 02 6C",
+          "02 01 00 6D 02 6D 02 00 00 6E 02 6E 02 00 00 85",
+          "02 85 02 01 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA03",
+      "type": 218,
+      "bytes": 251,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA FB 03 DA B2 00 04 FF 1F B6 40 86 02 86 02 00",
+          "00 94 02 94 02 01 00 95 02 95 02 00 00 A5 02 A5",
+          "02 01 00 A6 02 A6 02 00 00 A7 02 A7 02 01 00 A8",
+          "02 A8 02 00 00 BD 02 BD 02 01 00 BE 02 BE 02 00",
+          "00 CD 02 CD 02 01 00 D8 02 D8 02 FF FF D9 02 D9",
+          "02 FF FF DA 02 DA 02 FF FF DB 02 DB 02 FF FF DC",
+          "02 DC 02 FF FF DD 02 DD 02 FF FF DE 02 DE 02 FF",
+          "FF DF 02 DF 02 FF FF E3 02 E3 02 01 00 E4 02 E4",
+          "02 00 00 E5 02 E5 02 01 00 EB 02 EB 02 06 00 F6",
+          "02 F6 02 08 00 12 03 12 03 03 00 13 03 13 03 01",
+          "00 14 03 14 03 00 00 15 03 15 03 01 00 16 03 16",
+          "03 00 00 17 03 17 03 01 00 18 03 18 03 00 00 19",
+          "03 19 03 01 00 1A 03 1A 03 00 00 1B 03 1B 03 01",
+          "00 1C 03 1C 03 00 00 1D 03 1D 03 01 00 1E 03 1E",
+          "03 00 00 1F 03 1F 03 01 00 20 03 20 03 00 00 25",
+          "03 25 03 01 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA04",
+      "type": 218,
+      "bytes": 251,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA FB 04 DA B2 00 04 FF 1F B6 40 26 03 26 03 01",
+          "00 29 03 29 03 01 00 2A 03 2A 03 00 00 2B 03 2B",
+          "03 01 00 2C 03 2C 03 00 00 38 03 38 03 01 00 39",
+          "03 39 03 00 00 41 03 41 03 03 00 42 03 42 03 04",
+          "00 43 03 43 03 05 00 46 03 46 03 01 00 47 03 47",
+          "03 02 00 48 03 48 03 05 00 49 03 49 03 FF FF 4A",
+          "03 4A 03 FF FF 4D 03 4D 03 01 00 4E 03 4E 03 00",
+          "00 4F 03 4F 03 01 00 50 03 50 03 00 00 57 03 57",
+          "03 00 00 58 03 58 03 01 00 5D 03 5D 03 01 00 5E",
+          "03 5E 03 00 00 5F 03 5F 03 01 00 60 03 60 03 00",
+          "00 61 03 61 03 01 00 62 03 62 03 00 00 64 03 64",
+          "03 01 00 65 03 65 03 00 00 66 03 66 03 00 00 67",
+          "03 67 03 01 00 69 03 69 03 00 00 6A 03 6A 03 01",
+          "00 6B 03 6B 03 02 00 6C 03 6C 03 00 00 6D 03 6D",
+          "03 01 00 6E 03 6E 03 FF FF 74 03 74 03 00 00 75",
+          "03 75 03 01 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA05",
+      "type": 218,
+      "bytes": 251,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA FB 05 DA B2 00 04 FF 1F B6 40 78 03 78 03 01",
+          "00 79 03 79 03 00 00 83 03 83 03 07 00 A0 03 A0",
+          "03 01 00 A1 03 A1 03 00 00 A2 03 A2 03 01 00 A3",
+          "03 A3 03 00 00 A6 03 A6 03 01 00 A7 03 A7 03 00",
+          "00 BE 03 BE 03 FF FF C1 03 C1 03 02 00 C2 03 C2",
+          "03 03 00 C3 03 C3 03 04 00 C5 03 C5 03 01 00 C6",
+          "03 C6 03 00 00 C7 03 C7 03 01 00 C8 03 C8 03 02",
+          "00 C9 03 C9 03 01 00 CA 03 CA 03 00 00 CB 03 CB",
+          "03 FF FF F6 03 F6 03 01 00 F7 03 F7 03 00 00 FE",
+          "03 FE 03 01 00 FF 03 FF 03 00 00 01 04 01 04 01",
+          "00 02 04 02 04 00 00 03 04 03 04 01 00 04 04 04",
+          "04 00 00 1E 04 1E 04 01 00 1F 04 1F 04 00 00 20",
+          "04 20 04 FF FF 2B 04 2B 04 FF FF 31 04 31 04 FF",
+          "FF 32 04 32 04 01 00 33 04 33 04 00 00 36 04 36",
+          "04 01 00 37 04 37 04 00 00 38 04 38 04 01 00 39",
+          "04 39 04 00 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA06",
+      "type": 218,
+      "bytes": 251,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA FB 06 DA B2 00 04 FF 1F B6 40 3A 04 3A 04 01",
+          "00 3B 04 3B 04 00 00 40 04 40 04 01 00 41 04 41",
+          "04 00 00 42 04 42 04 01 00 43 04 43 04 00 00 44",
+          "04 44 04 01 00 45 04 45 04 00 00 46 04 46 04 01",
+          "00 47 04 47 04 00 00 4B 04 4B 04 01 00 4C 04 4C",
+          "04 00 00 4D 04 4D 04 00 00 4E 04 4E 04 01 00 4F",
+          "04 4F 04 02 00 51 04 51 04 FF FF 52 04 52 04 FF",
+          "FF 61 04 61 04 01 00 62 04 62 04 00 00 7D 04 7D",
+          "04 01 00 7E 04 7E 04 00 00 7F 04 7F 04 02 00 80",
+          "04 80 04 01 00 81 04 81 04 00 00 85 04 85 04 01",
+          "00 86 04 86 04 00 00 87 04 87 04 01 00 88 04 88",
+          "04 00 00 89 04 89 04 FF FF 8C 04 8C 04 01 00 8D",
+          "04 8D 04 00 00 96 04 96 04 01 00 97 04 97 04 00",
+          "00 98 04 98 04 FF FF 99 04 99 04 00 00 9A 04 9A",
+          "04 01 00 9B 04 9B 04 02 00 9E 04 9E 04 01 00 9F",
+          "04 9F 04 00 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA07",
+      "type": 218,
+      "bytes": 125,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA 7D 07 DA B2 00 04 FF 1F B6 40 A0 04 A0 04 01",
+          "00 A1 04 A1 04 00 00 A2 04 A2 04 01 00 A3 04 A3",
+          "04 00 00 E6 04 E6 04 01 00 E7 04 E7 04 00 00 EC",
+          "04 EC 04 01 00 ED 04 ED 04 00 00 4E 05 4E 05 01",
+          "00 4F 05 4F 05 00 00 4A 40 4A 40 01 00 4B 40 4B",
+          "40 00 00 4C 40 4C 40 FF FF 0C 80 0C 80 00 00 0D",
+          "80 0D 80 00 00 0E 80 0E 80 01 00 12 80 12 80 FF",
+          "FF 04 A0 04 A0 01 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDA08",
+      "type": 218,
+      "bytes": 77,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DA 4D 08 DA B2 00 04 FF 1F B6 40 00 F1 00 F1 01",
+          "00 02 F1 02 F1 01 00 10 F1 10 F1 01 00 12 F1 12",
+          "F1 01 00 20 F1 20 F1 01 00 22 F1 22 F1 01 00 30",
+          "F1 30 F1 01 00 32 F1 32 F1 01 00 00 F6 00 F6 01",
+          "00 01 F6 01 F6 01 00 FF FF FF FF 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDC00",
+      "type": 220,
+      "bytes": 22,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DC 16 00 DC 00 F1 00 00 02 F1 00 00 00 00 00 00",
+          "00 00 00 00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDC01",
+      "type": 220,
+      "bytes": 22,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DC 16 01 DC 10 F1 00 00 12 F1 00 00 00 00 00 00",
+          "00 00 00 00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDC02",
+      "type": 220,
+      "bytes": 22,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DC 16 02 DC 20 F1 00 00 22 F1 00 00 00 00 00 00",
+          "00 00 00 00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDC03",
+      "type": 220,
+      "bytes": 22,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DC 16 03 DC 30 F1 00 00 32 F1 00 00 00 00 00 00",
+          "00 00 00 00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDD00",
+      "type": 221,
+      "bytes": 19,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DD 13 00 DD 02 01 00 00 F6 01 F6 00 00 00 00 00",
+          "00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xDE00",
+      "type": 222,
+      "bytes": 16,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "DE 10 00 DE 01 04 00 00 25 01 12 06 02 01 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xF027",
+      "type": 130,
+      "bytes": 20,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "82 14 27 F0 24 41 4D 54 00 00 00 00 00 A5 AF 02",
+          "C0 00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xF028",
+      "type": 131,
+      "bytes": 64,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "83 40 28 F0 35 00 00 00 0B 00 00 00 00 00 0C 00",
+          "F8 00 54 A1 00 00 00 00 01 00 00 00 08 00 0B 00",
+          "83 12 61 00 00 00 00 00 FE 00 E3 15 00 00 00 00",
+          "00 00 00 00 26 00 00 00 76 50 72 6F 00 00 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xF029",
+      "type": 205,
+      "bytes": 26,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "CD 1A 29 F0 03 01 00 01 07 00 00 00 02 00 00 00",
+          "00 F6 00 03 00 00 05 00 00 00"
+        ],
+        "strings": [
+          "Reference Code - CPU",
+          "uCode Version",
+          "TXT ACM version"
+        ]
+      }
+    },
+    {
+      "handle": "0xF02A",
+      "type": 205,
+      "bytes": 26,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "CD 1A 2A F0 03 01 00 01 07 00 00 00 02 00 0B 00",
+          "00 0C 00 03 04 0B 08 61 83 12"
+        ],
+        "strings": [
+          "Reference Code - ME 11.0",
+          "MEBx version",
+          "ME Firmware Version",
+          "Corporate SKU"
+        ]
+      }
+    },
+    {
+      "handle": "0xF02B",
+      "type": 205,
+      "bytes": 75,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "CD 4B 2B F0 0A 01 00 01 07 00 00 00 02 03 FF FF",
+          "FF FF FF 04 00 FF FF FF 31 00 05 00 FF FF FF 31",
+          "00 06 00 FF FF FF FF FF 07 00 3E 00 00 00 00 08",
+          "00 34 00 00 00 00 09 00 0B 00 00 00 00 0A 00 3E",
+          "00 00 00 00 0B 00 34 00 00 00 00"
+        ],
+        "strings": [
+          "Reference Code - SKL PCH",
+          "PCH-CRID Status",
+          "Disabled",
+          "PCH-CRID Original Value",
+          "PCH-CRID New Value",
+          "OPROM - RST - RAID",
+          "SKL PCH H Bx Hsio Version",
+          "SKL PCH H Dx Hsio Version",
+          "KBL PCH H Ax Hsio Version",
+          "SKL PCH LP Bx Hsio Version",
+          "SKL PCH LP Cx Hsio Version"
+        ]
+      }
+    },
+    {
+      "handle": "0xF02C",
+      "type": 205,
+      "bytes": 54,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "CD 36 2C F0 07 01 00 01 07 00 00 00 02 00 01 07",
+          "00 00 00 03 00 01 07 00 00 00 04 05 FF FF FF FF",
+          "FF 06 00 FF FF FF 05 00 07 00 FF FF FF 05 00 08",
+          "00 FF FF FF FF FF"
+        ],
+        "strings": [
+          "Reference Code - SA - System Agent",
+          "Reference Code - MRC",
+          "SA - PCIe Version",
+          "SA-CRID Status",
+          "Disabled",
+          "SA-CRID Original Value",
+          "SA-CRID New Value",
+          "OPROM - VBIOS"
+        ]
+      }
+    },
+    {
+      "handle": "0xF02D",
+      "type": 205,
+      "bytes": 103,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "CD 67 2D F0 0E 01 00 00 00 00 A6 00 02 00 FF FF",
+          "FF FF FF 03 04 FF FF FF FF FF 05 06 FF FF FF FF",
+          "FF 07 08 FF FF FF FF FF 09 00 00 00 00 00 00 0A",
+          "00 FF FF FF FF FF 0B 00 FF FF 00 00 00 0C 00 00",
+          "09 00 84 10 0D 00 02 00 00 00 00 0E 00 FF FF FF",
+          "FF FF 0F 00 FF FF FF FF FF 10 11 01 03 03 01 00",
+          "12 00 00 07 03 00 00"
+        ],
+        "strings": [
+          "Lan Phy Version",
+          "Sensor Firmware Version",
+          "Debug Mode Status",
+          "Disabled",
+          "Performance Mode Status",
+          "Disabled",
+          "Debug Use USB(Disabled:Serial)",
+          "Disabled",
+          "ICC Overclocking Version",
+          "UNDI Version",
+          "EC FW Version",
+          "GOP Version",
+          "BIOS Guard Version",
+          "Base EC FW Version",
+          "EC-EC Protocol Version",
+          "Royal Park Version",
+          "BP1.3.3.0_RP01",
+          "Platform Version"
+        ]
+      }
+    },
+    {
+      "handle": "0xF037",
+      "type": 136,
+      "bytes": 6,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "88 06 37 F0 00 00"
+        ]
+      }
+    },
+    {
+      "handle": "0xF038",
+      "type": 14,
+      "bytes": 20,
+      "description": "Group Associations",
+      "values": {
+        "name": "Firmware Version Info",
+        "items": "5",
+        "items_data": [
+          "0xF029 (OEM-specific)",
+          "0xF02A (OEM-specific)",
+          "0xF02B (OEM-specific)",
+          "0xF02C (OEM-specific)",
+          "0xF02D (OEM-specific)"
+        ]
+      }
+    },
+    {
+      "handle": "0xF03A",
+      "type": 13,
+      "bytes": 22,
+      "description": "BIOS Language Information",
+      "values": {
+        "language_description_format": "Long",
+        "installable_languages": "2",
+        "installable_languages_data": [
+          "en|US|iso8859-1",
+          "<BAD INDEX>"
+        ],
+        "currently_installed_language": "en|US|iso8859-1"
+      }
+    },
+    {
+      "handle": "0xF03B",
+      "type": 14,
+      "bytes": 8,
+      "description": "Group Associations",
+      "values": {
+        "name": "$MEI",
+        "items": "1",
+        "items_data": [
+          "0x0000 (OEM-specific)"
+        ]
+      }
+    },
+    {
+      "handle": "0xF03C",
+      "type": 203,
+      "bytes": 81,
+      "description": "OEM-specific Type",
+      "values": {
+        "header_and_data": [
+          "CB 51 3C F0 01 03 01 45 02 00 90 06 81 10 80 30",
+          "00 00 00 00 40 68 00 01 1F 00 00 C9 0B C0 47 02",
+          "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF",
+          "FF FF FF FF FF FF FF FF 03 00 00 00 80 00 00 00",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+          "00"
+        ],
+        "strings": [
+          "MEI1",
+          "MEI2",
+          "MEI3"
+        ]
+      }
+    },
+    {
+      "handle": "0xF043",
+      "type": 127,
+      "bytes": 4,
+      "description": "End Of Table",
+      "values": null
+    }
+  ],
+  "lsblk": {
+    "blockdevices": [
+      {
+        "alignment": 0,
+        "id-link": "nvme-eui.002538b711b8a77b",
+        "id": "eui.002538b711b8a77b",
+        "disc-aln": 0,
+        "dax": false,
+        "disc-gran": "512B",
+        "disk-seq": 1,
+        "disc-max": "2T",
+        "disc-zero": false,
+        "fsavail": null,
+        "fsroots": [],
+        "fssize": null,
+        "fstype": null,
+        "fsused": null,
+        "fsuse%": null,
+        "fsver": null,
+        "group": "disk",
+        "hctl": null,
+        "hotplug": false,
+        "kname": "nvme0n1",
+        "label": null,
+        "log-sec": 512,
+        "maj:min": "259:0",
+        "maj": "259",
+        "min": "0",
+        "min-io": 512,
+        "mode": "brw-rw----",
+        "model": "Samsung SSD 980 PRO 1TB",
+        "mq": "  4",
+        "name": "nvme0n1",
+        "opt-io": 0,
+        "owner": "root",
+        "partflags": null,
+        "partlabel": null,
+        "partn": null,
+        "parttype": null,
+        "parttypename": null,
+        "partuuid": null,
+        "path": "/dev/nvme0n1",
+        "phy-sec": 512,
+        "pkname": null,
+        "pttype": "gpt",
+        "ptuuid": "aac8de73-6b66-46c3-a4e7-0d4ab11072cd",
+        "ra": 128,
+        "rand": false,
+        "rev": "3B2QGXA7",
+        "rm": false,
+        "ro": false,
+        "rota": false,
+        "rq-size": 1023,
+        "sched": "none",
+        "serial": "S5GXNF0R780599H",
+        "size": "931.5G",
+        "start": null,
+        "state": "live",
+        "subsystems": "block:nvme:pci",
+        "mountpoint": null,
+        "mountpoints": [],
+        "tran": "nvme",
+        "type": "disk",
+        "uuid": null,
+        "vendor": null,
+        "wsame": "0B",
+        "wwn": "eui.002538b711b8a77b",
+        "zoned": "none",
+        "zone-sz": "0B",
+        "zone-wgran": "0B",
+        "zone-app": "0B",
+        "zone-nr": 0,
+        "zone-omax": 0,
+        "zone-amax": 0,
+        "children": [
+          {
+            "alignment": 0,
+            "id-link": "nvme-eui.002538b711b8a77b-part1",
+            "id": "eui.002538b711b8a77b-part1",
+            "disc-aln": 0,
+            "dax": false,
+            "disc-gran": "512B",
+            "disk-seq": 1,
+            "disc-max": "2T",
+            "disc-zero": false,
+            "fsavail": "965.3M",
+            "fsroots": [
+              "/"
+            ],
+            "fssize": "974.1M",
+            "fstype": "vfat",
+            "fsused": "8.8M",
+            "fsuse%": "1%",
+            "fsver": "FAT32",
+            "group": "disk",
+            "hctl": null,
+            "hotplug": false,
+            "kname": "nvme0n1p1",
+            "label": null,
+            "log-sec": 512,
+            "maj:min": "259:1",
+            "maj": "259",
+            "min": "1",
+            "min-io": 512,
+            "mode": "brw-rw----",
+            "model": null,
+            "mq": "  4",
+            "name": "nvme0n1p1",
+            "opt-io": 0,
+            "owner": "root",
+            "partflags": null,
+            "partlabel": null,
+            "partn": 1,
+            "parttype": "c12a7328-f81f-11d2-ba4b-00a0c93ec93b",
+            "parttypename": "EFI System",
+            "partuuid": "53ff8f25-7ed5-481c-83c3-cbe7b52c30a6",
+            "path": "/dev/nvme0n1p1",
+            "phy-sec": 512,
+            "pkname": "nvme0n1",
+            "pttype": "gpt",
+            "ptuuid": "aac8de73-6b66-46c3-a4e7-0d4ab11072cd",
+            "ra": 128,
+            "rand": false,
+            "rev": null,
+            "rm": false,
+            "ro": false,
+            "rota": false,
+            "rq-size": 1023,
+            "sched": "none",
+            "serial": null,
+            "size": "976M",
+            "start": 2048,
+            "state": null,
+            "subsystems": "block:nvme:pci",
+            "mountpoint": "/boot/efi",
+            "mountpoints": [
+              "/boot/efi"
+            ],
+            "tran": "nvme",
+            "type": "part",
+            "uuid": "DFFE-77CC",
+            "vendor": null,
+            "wsame": "0B",
+            "wwn": "eui.002538b711b8a77b",
+            "zoned": "none",
+            "zone-sz": "0B",
+            "zone-wgran": "0B",
+            "zone-app": "0B",
+            "zone-nr": 0,
+            "zone-omax": 0,
+            "zone-amax": 0
+          },
+          {
+            "alignment": 0,
+            "id-link": "nvme-eui.002538b711b8a77b-part2",
+            "id": "eui.002538b711b8a77b-part2",
+            "disc-aln": 0,
+            "dax": false,
+            "disc-gran": "512B",
+            "disk-seq": 1,
+            "disc-max": "2T",
+            "disc-zero": false,
+            "fsavail": "507.6G",
+            "fsroots": [
+              "/"
+            ],
+            "fssize": "883.5G",
+            "fstype": "ext4",
+            "fsused": "330.9G",
+            "fsuse%": "37%",
+            "fsver": "1.0",
+            "group": "disk",
+            "hctl": null,
+            "hotplug": false,
+            "kname": "nvme0n1p2",
+            "label": null,
+            "log-sec": 512,
+            "maj:min": "259:2",
+            "maj": "259",
+            "min": "2",
+            "min-io": 512,
+            "mode": "brw-rw----",
+            "model": null,
+            "mq": "  4",
+            "name": "nvme0n1p2",
+            "opt-io": 0,
+            "owner": "root",
+            "partflags": null,
+            "partlabel": null,
+            "partn": 2,
+            "parttype": "0fc63daf-8483-4772-8e79-3d69d8477de4",
+            "parttypename": "Linux filesystem",
+            "partuuid": "622aaa26-0dec-4cf0-9afc-68d89a183035",
+            "path": "/dev/nvme0n1p2",
+            "phy-sec": 512,
+            "pkname": "nvme0n1",
+            "pttype": "gpt",
+            "ptuuid": "aac8de73-6b66-46c3-a4e7-0d4ab11072cd",
+            "ra": 128,
+            "rand": false,
+            "rev": null,
+            "rm": false,
+            "ro": false,
+            "rota": false,
+            "rq-size": 1023,
+            "sched": "none",
+            "serial": null,
+            "size": "898.7G",
+            "start": 2000896,
+            "state": null,
+            "subsystems": "block:nvme:pci",
+            "mountpoint": "/",
+            "mountpoints": [
+              "/"
+            ],
+            "tran": "nvme",
+            "type": "part",
+            "uuid": "9df29bef-3653-448c-8a87-8131dabd91ca",
+            "vendor": null,
+            "wsame": "0B",
+            "wwn": "eui.002538b711b8a77b",
+            "zoned": "none",
+            "zone-sz": "0B",
+            "zone-wgran": "0B",
+            "zone-app": "0B",
+            "zone-nr": 0,
+            "zone-omax": 0,
+            "zone-amax": 0
+          },
+          {
+            "alignment": 0,
+            "id-link": "nvme-eui.002538b711b8a77b-part3",
+            "id": "eui.002538b711b8a77b-part3",
+            "disc-aln": 0,
+            "dax": false,
+            "disc-gran": "512B",
+            "disk-seq": 1,
+            "disc-max": "2T",
+            "disc-zero": false,
+            "fsavail": null,
+            "fsroots": [],
+            "fssize": null,
+            "fstype": "swap",
+            "fsused": null,
+            "fsuse%": null,
+            "fsver": "1",
+            "group": "disk",
+            "hctl": null,
+            "hotplug": false,
+            "kname": "nvme0n1p3",
+            "label": null,
+            "log-sec": 512,
+            "maj:min": "259:3",
+            "maj": "259",
+            "min": "3",
+            "min-io": 512,
+            "mode": "brw-rw----",
+            "model": null,
+            "mq": "  4",
+            "name": "nvme0n1p3",
+            "opt-io": 0,
+            "owner": "root",
+            "partflags": null,
+            "partlabel": null,
+            "partn": 3,
+            "parttype": "0657fd6d-a4ab-43c4-84e5-0933c84b4f4f",
+            "parttypename": "Linux swap",
+            "partuuid": "21e302f2-c36c-4bd6-9762-2685a06c3c9b",
+            "path": "/dev/nvme0n1p3",
+            "phy-sec": 512,
+            "pkname": "nvme0n1",
+            "pttype": "gpt",
+            "ptuuid": "aac8de73-6b66-46c3-a4e7-0d4ab11072cd",
+            "ra": 128,
+            "rand": false,
+            "rev": null,
+            "rm": false,
+            "ro": false,
+            "rota": false,
+            "rq-size": 1023,
+            "sched": "none",
+            "serial": null,
+            "size": "31.9G",
+            "start": 1886660608,
+            "state": null,
+            "subsystems": "block:nvme:pci",
+            "mountpoint": "[SWAP]",
+            "mountpoints": [
+              "[SWAP]"
+            ],
+            "tran": "nvme",
+            "type": "part",
+            "uuid": "01a12c04-ad14-4850-9802-2e3fb85d4f08",
+            "vendor": null,
+            "wsame": "0B",
+            "wwn": "eui.002538b711b8a77b",
+            "zoned": "none",
+            "zone-sz": "0B",
+            "zone-wgran": "0B",
+            "zone-app": "0B",
+            "zone-nr": 0,
+            "zone-omax": 0,
+            "zone-amax": 0
+          }
+        ]
+      }
+    ]
+  },
+  "nproc": {
+    "nproc_all": 4
+  }
+}

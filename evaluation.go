@@ -22,10 +22,11 @@ type Extra struct {
 }
 
 type EvaluationFile struct {
-	Title       string            `yaml:"title"`
-	Extras      []Extra           `yaml:"extras"`
-	NetdataFile string            `yaml:"netdatafile"`
-	Entries     []EvaluationEntry `yaml:"entries"`
+	Title        string            `yaml:"title"`
+	Extras       []Extra           `yaml:"extras"`
+	NetdataFile  string            `yaml:"netdatafile"`
+	BigfetchFile string            `yaml:"bigfetchfile"`
+	Entries      []EvaluationEntry `yaml:"entries"`
 }
 
 func loadEvaluation(path string) (*EvaluationFile, error) {

@@ -361,8 +361,16 @@ func runReport(args []string) {
 		}
 	}
 
+	var hardware *HardwareInfo
+	if eval.BigfetchFile != "" {
+		hardware, err = loadBigfetch(eval.BigfetchFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Warning: cannot load bigfetch file: %v\n", err)
+		}
+	}
+
 	if serveMode {
-		html := generateHTML(eval, netdata)
+		html := generateHTML(eval, netdata, hardware)
 		if err := serveHTML(html, serveAddr); err != nil {
 			fmt.Fprintf(os.Stderr, "Error serving report: %v\n", err)
 			os.Exit(1)
@@ -375,7 +383,7 @@ func runReport(args []string) {
 	}
 
 	if strings.HasSuffix(outputPath, ".html") {
-		html := generateHTML(eval, netdata)
+		html := generateHTML(eval, netdata, hardware)
 		if err := os.WriteFile(outputPath, []byte(html), 0644); err != nil {
 			fmt.Fprintf(os.Stderr, "Error writing HTML: %v\n", err)
 			os.Exit(1)

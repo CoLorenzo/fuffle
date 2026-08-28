@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics) string {
+func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *HardwareInfo) string {
 	durations := make([]float64, len(eval.Entries))
 	for i, e := range eval.Entries {
 		durations[i] = entryDuration(e)
@@ -221,6 +221,42 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics) string {
   <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span> GPU</div>
   <div class="legend-item"><span class="legend-dot" style="background:#f97316"></span> Disk</div>
 </div>`)
+		b.WriteString(`</div>`)
+	}
+
+	// Hardware info
+	if hardware != nil {
+		b.WriteString(`<h2>Sistema</h2>
+<div class="stats">`)
+
+		if hardware.CPU.Model != "" {
+			b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">CPU</div><div class="value">%s</div></div>`, escHTML(hardware.CPU.Model)))
+			b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Core / Thread</div><div class="value">%d / %d</div></div>`, hardware.CPU.Cores, hardware.CPU.Threads))
+		}
+
+		if len(hardware.GPU) > 0 {
+			for _, gpu := range hardware.GPU {
+				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">GPU</div><div class="value">%s</div></div>`, escHTML(gpu.Model)))
+				if gpu.VRAM != "" {
+					b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">VRAM</div><div class="value">%s</div></div>`, escHTML(gpu.VRAM)))
+				}
+			}
+		}
+
+		if len(hardware.RAM) > 0 {
+			for _, ram := range hardware.RAM {
+				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">RAM</div><div class="value">%s</div></div>`, escHTML(ram.Model)))
+				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Clock / Tipo</div><div class="value">%s / %s</div></div>`, escHTML(ram.Clock), escHTML(ram.Technology)))
+			}
+		}
+
+		if len(hardware.Disk) > 0 {
+			for _, disk := range hardware.Disk {
+				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Disco</div><div class="value">%s</div></div>`, escHTML(disk.Model)))
+				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Tipo</div><div class="value">%s</div></div>`, escHTML(disk.Type)))
+			}
+		}
+
 		b.WriteString(`</div>`)
 	}
 
