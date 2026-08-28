@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -18,11 +19,13 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 
 	accuracy := calcAccuracyOverTime(eval.Entries)
 
-	okCount := 0
+	resultCounts := make(map[string]int)
 	for _, e := range eval.Entries {
-		if len(e.Tags) > 0 {
-			okCount++
+		r := e.Result
+		if r == "" {
+			r = "N/A"
 		}
+		resultCounts[r]++
 	}
 
 	var b strings.Builder
@@ -76,6 +79,45 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
     font-size: 1.1rem;
     color: var(--accent);
     margin: 2rem 0 1rem 0;
+  }
+  .results-summary {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    background: var(--bg);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+  }
+  .results-legend {
+    flex: 1;
+    min-width: 200px;
+  }
+  .results-legend h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+  }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-label { flex: 1; }
+  .legend-count { font-weight: bold; }
+  .legend-pct { color: var(--text-secondary); font-size: 0.8rem; }
+  .pie-container {
+    flex-shrink: 0;
   }
   .stats {
     display: grid;
@@ -177,6 +219,85 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 <h1>` + escHTML(eval.Title) + `</h1>
 <p class="subtitle">Report generato</p>
 `)
+
+	// Results summary with pie chart
+	total := len(eval.Entries)
+	okCount := 0
+	for _, e := range eval.Entries {
+		if len(e.Tags) > 0 {
+			okCount++
+		}
+	}
+	if total > 0 {
+		colors := []string{"#22c55e", "#3b82f6", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899", "#06b6d4", "#84cc16"}
+		entries := make([]struct {
+			Label string
+			Count int
+			Pct   float64
+		}, 0, len(resultCounts))
+		for label, count := range resultCounts {
+			entries = append(entries, struct {
+				Label string
+				Count int
+				Pct   float64
+			}{label, count, float64(count) / float64(total) * 100})
+		}
+		for i := range entries {
+			for j := i + 1; j < len(entries); j++ {
+				if entries[j].Count > entries[i].Count {
+					entries[i], entries[j] = entries[j], entries[i]
+				}
+			}
+		}
+
+		b.WriteString(`<h2>Risultati</h2>
+<div class="results-summary">
+<div class="results-legend">
+<h3>Uniques (` + fmt.Sprintf("%d", len(entries)) + `)</h3>`)
+		for i, e := range entries {
+			c := colors[i%len(colors)]
+			b.WriteString(fmt.Sprintf(`<div class="legend-row">
+<span class="legend-dot" style="background:%s"></span>
+<span class="legend-label">%s</span>
+<span class="legend-count">%d</span>
+<span class="legend-pct">(%s)</span>
+</div>`, c, escHTML(e.Label), e.Count, fmt.Sprintf("%.1f%%", e.Pct)))
+		}
+		b.WriteString(`</div>
+<div class="pie-container">`)
+
+		r, cx, cy := 60.0, 70.0, 70.0
+		var cumAngle float64
+		for i, e := range entries {
+			c := colors[i%len(colors)]
+			angle := e.Pct / 100 * 360
+			startA := cumAngle
+			endA := cumAngle + angle
+			cumAngle = endA
+
+			startRad := startA * 3.14159265 / 180
+			endRad := endA * 3.14159265 / 180
+
+			x1 := cx + r*math.Cos(startRad)
+			y1 := cy + r*math.Sin(startRad)
+			x2 := cx + r*math.Cos(endRad)
+			y2 := cy + r*math.Sin(endRad)
+
+			largeArc := 0
+			if angle > 180 {
+				largeArc = 1
+			}
+
+			if len(entries) == 1 {
+				b.WriteString(fmt.Sprintf(`<svg width="140" height="140"><circle cx="%v" cy="%v" r="%v" fill="%s"/></svg>`, cx, cy, r, c))
+			} else {
+				b.WriteString(fmt.Sprintf(`<svg width="140" height="140"><path d="M%v,%v L%v,%v A%v,%v 0 %d,1 %v,%v Z" fill="%s"/></svg>`,
+					cx, cy, x1, y1, r, r, largeArc, x2, y2, c))
+			}
+		}
+		b.WriteString(`</div>
+</div>`)
+	}
 
 	// Hardware info
 	if hardware != nil {
