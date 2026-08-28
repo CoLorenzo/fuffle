@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
@@ -25,14 +26,62 @@ type NetdataMetrics struct {
 }
 
 func loadNetdata(path string) (*NetdataMetrics, error) {
-	f, err := os.Open(path)
+	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("cannot open netdata file %q: %w", path, err)
 	}
-	defer f.Close()
+
+	if len(data) > 0 && data[0] == '{' {
+		return parseNetdataJSON(data)
+	}
+	return parseNetdataCSV(data)
+}
+
+func parseNetdataJSON(data []byte) (*NetdataMetrics, error) {
+	var raw map[string]json.RawMessage
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return nil, fmt.Errorf("cannot parse netdata JSON: %w", err)
+	}
 
 	metrics := &NetdataMetrics{}
-	scanner := bufio.NewScanner(f)
+
+	getValue := func(chartName string) float64 {
+		entry, ok := raw[chartName]
+		if !ok {
+			return 0
+		}
+		var obj struct {
+			Dimensions map[string]struct {
+				Value float64 `json:"value"`
+			} `json:"dimensions"`
+		}
+		if err := json.Unmarshal(entry, &obj); err != nil {
+			return 0
+		}
+		total := 0.0
+		for _, d := range obj.Dimensions {
+			total += d.Value
+		}
+		return total
+	}
+
+	cpu := getValue("system.cpu")
+	ram := getValue("system.ram")
+	gpu := getValue("gpu.cuda_gpu")
+	disk := getValue("system.disk")
+
+	metrics.Timestamps = append(metrics.Timestamps, 0)
+	metrics.CPU = append(metrics.CPU, cpu)
+	metrics.RAM = append(metrics.RAM, ram)
+	metrics.GPU = append(metrics.GPU, gpu)
+	metrics.Disk = append(metrics.Disk, disk)
+
+	return metrics, nil
+}
+
+func parseNetdataCSV(data []byte) (*NetdataMetrics, error) {
+	metrics := &NetdataMetrics{}
+	scanner := bufio.NewScanner(strings.NewReader(string(data)))
 	lineNum := 0
 	for scanner.Scan() {
 		lineNum++
