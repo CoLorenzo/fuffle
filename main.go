@@ -44,7 +44,7 @@ const (
 	alphanumericChars    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 )
 
-const version = "1.6.0"
+const version = "1.6.1"
 
 func main() {
 	if len(os.Args) < 2 {
