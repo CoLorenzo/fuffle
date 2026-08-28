@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"strconv"
@@ -31,24 +30,10 @@ func sessionNew() {
 		fmt.Fprintf(os.Stderr, "Warning: %s already exists, overwriting\n", sessionFile)
 	}
 
-	reader := bufio.NewReader(os.Stdin)
-
-	fmt.Print("Title: ")
-	title, _ := reader.ReadString('\n')
-	title = strings.TrimSpace(title)
-
-	fmt.Print("Bigfetch file (empty to skip): ")
-	bigfetch, _ := reader.ReadString('\n')
-	bigfetch = strings.TrimSpace(bigfetch)
-
-	fmt.Print("Netdata file (empty to skip): ")
-	netdata, _ := reader.ReadString('\n')
-	netdata = strings.TrimSpace(netdata)
-
 	session := SessionFile{
-		Title:        title,
-		BigfetchFile: bigfetch,
-		NetdataFile:  netdata,
+		Title:        "title",
+		BigfetchFile: "",
+		NetdataFile:  "./metrics.json",
 		Extras:       []Extra{},
 		Info:         SessionInfo{},
 		Entries:      []EvaluationEntry{},
