@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func serveHTML(htmlContent, addr string) error {
+func serveHTML(htmlContent, resultsHTML, addr string) error {
 	if addr == "" {
 		addr = ":8080"
 	}
@@ -21,6 +21,11 @@ func serveHTML(htmlContent, addr string) error {
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		fmt.Fprint(w, htmlContent)
+	})
+
+	mux.HandleFunc("/results.html", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		fmt.Fprint(w, resultsHTML)
 	})
 
 	mux.HandleFunc("/images/", func(w http.ResponseWriter, r *http.Request) {

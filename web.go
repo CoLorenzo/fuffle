@@ -13,12 +13,17 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 
 	mean := Mean(durations)
 	std := StdDev(durations)
-	median := Median(durations)
-	mode := Mode(durations)
 	startMin, endMax := totalDuration(eval.Entries)
 	totalMs := float64(endMax - startMin)
 
 	accuracy := calcAccuracyOverTime(eval.Entries)
+
+	okCount := 0
+	for _, e := range eval.Entries {
+		if len(e.Tags) > 0 {
+			okCount++
+		}
+	}
 
 	var b strings.Builder
 
@@ -30,18 +35,15 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 <title>` + escHTML(eval.Title) + `</title>
 <style>
   :root {
-    --bg: #ffffff;
-    --surface: #f8fafc;
-    --border: #e2e8f0;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --border: #3b82f6;
+    --border-light: #e2e8f0;
     --text: #1e293b;
     --text-secondary: #64748b;
     --accent: #3b82f6;
     --ok: #22c55e;
     --fail: #ef4444;
-    --cpu: #3b82f6;
-    --ram: #22c55e;
-    --gpu: #a855f7;
-    --disk: #f97316;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -51,55 +53,57 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
     line-height: 1.6;
     padding: 2rem;
   }
-  .container { max-width: 1100px; margin: 0 auto; }
-  h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
-  .subtitle { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem; }
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
+  }
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--accent);
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 0.4rem;
     margin: 2rem 0 1rem 0;
   }
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  th {
-    text-align: left;
-    background: var(--surface);
-    border-bottom: 2px solid var(--border);
-    padding: 0.5rem 0.75rem;
-    color: var(--text-secondary);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-  }
-  td { padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--border); }
-  tr:hover td { background: var(--surface); }
-  .ok { color: var(--ok); font-weight: bold; }
-  .fail { color: var(--fail); font-weight: bold; }
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
     margin: 1rem 0;
   }
   .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--bg);
+    border: 1px solid var(--border-light);
     border-radius: 8px;
-    padding: 1rem 1.25rem;
+    padding: 1rem;
+    text-align: center;
   }
   .stat-card .label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-secondary);
     margin-bottom: 0.25rem;
   }
-  .stat-card .value { font-size: 1.4rem; font-weight: bold; }
+  .stat-card .value {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
   .chart-container {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--bg);
+    border: 1px solid var(--border-light);
     border-radius: 8px;
     padding: 1rem;
     margin: 1rem 0;
@@ -117,112 +121,62 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
   .legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
   .extras-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1rem;
     margin: 1rem 0;
   }
   .extra-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--bg);
+    border: 1px solid var(--border-light);
     border-radius: 8px;
     padding: 1.25rem;
   }
-  .extra-card h3 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
-    color: var(--text);
-  }
-  .extra-card .desc {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.75rem;
-  }
+  .extra-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .extra-card .desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
   .extra-card .body { font-size: 0.85rem; line-height: 1.5; }
-  .extra-card img {
-    max-width: 100%;
-    border-radius: 4px;
-    margin-top: 0.5rem;
+  .extra-card img { max-width: 100%; border-radius: 4px; margin-top: 0.5rem; }
+  .results-link {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  .results-link:hover { opacity: 0.9; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 1rem; }
+  th {
+    text-align: left;
+    background: var(--bg);
+    border-bottom: 2px solid var(--border-light);
+    padding: 0.5rem 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+  td { padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--border-light); }
+  tr:hover td { background: var(--bg); }
+  .ok { color: var(--ok); font-weight: bold; }
+  .fail { color: var(--fail); font-weight: bold; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
   }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="page">
 <h1>` + escHTML(eval.Title) + `</h1>
 <p class="subtitle">Report generato</p>
 `)
-
-	// Results table
-	b.WriteString(`<h2>Risultati</h2>
-<table>
-<thead><tr><th>File</th><th>Stato</th><th>Tempo (ms)</th><th>Tag</th></tr></thead>
-<tbody>`)
-	for _, e := range eval.Entries {
-		status := "OK"
-		cls := "ok"
-		if len(e.Tags) == 0 {
-			status = "FAIL"
-			cls = "fail"
-		}
-		tag := ""
-		if len(e.Tags) > 0 {
-			tag = e.Tags[0]
-		}
-		b.WriteString(fmt.Sprintf("<tr><td>%s</td><td class=\"%s\">%s</td><td>%.0f</td><td>%s</td></tr>",
-			escHTML(e.File), cls, status, entryDuration(e), escHTML(tag)))
-	}
-	b.WriteString(`</tbody></table>`)
-
-	// Stats cards
-	b.WriteString(fmt.Sprintf(`<h2>Statistiche Tempo</h2>
-<div class="stats">
-  <div class="stat-card"><div class="label">File totali</div><div class="value">%d</div></div>
-  <div class="stat-card"><div class="label">Tempo totale</div><div class="value">%.0f ms</div></div>
-  <div class="stat-card"><div class="label">Tempo medio</div><div class="value">%.1f ms</div></div>
-  <div class="stat-card"><div class="label">StdDev</div><div class="value">%.1f ms</div></div>
-  <div class="stat-card"><div class="label">Mediana</div><div class="value">%.1f ms</div></div>
-  <div class="stat-card"><div class="label">Moda</div><div class="value">%.1f ms</div></div>
-</div>`, len(eval.Entries), totalMs, mean, std, median, mode))
-
-	// Accuracy chart
-	b.WriteString(`<h2>Accuracy nel Tempo</h2>
-<div class="chart-container">`)
-	b.WriteString(buildHTMLLineChart(accuracy, "Accuracy %", 0, 100, "#3b82f6"))
-	b.WriteString(`</div>`)
-
-	// Netdata
-	if netdata != nil && len(netdata.Timestamps) > 0 {
-		b.WriteString(`<h2>Metriche di Sistema</h2>
-<table>
-<thead><tr><th>Metrica</th><th>Media</th><th>StdDev</th><th>Mediana</th><th>Moda</th></tr></thead>
-<tbody>`)
-		metrics := []struct {
-			name string
-			data []float64
-		}{
-			{"CPU", netdata.CPU},
-			{"RAM", netdata.RAM},
-			{"GPU", netdata.GPU},
-			{"Disk", netdata.Disk},
-		}
-		for _, m := range metrics {
-			if len(m.data) > 0 {
-				b.WriteString(fmt.Sprintf("<tr><td>%s</td><td>%.1f</td><td>%.1f</td><td>%.1f</td><td>%.1f</td></tr>",
-					m.name, Mean(m.data), StdDev(m.data), Median(m.data), Mode(m.data)))
-			}
-		}
-		b.WriteString(`</tbody></table>`)
-
-		b.WriteString(`<h2>Metriche nel Tempo</h2>
-<div class="chart-container">`)
-		b.WriteString(buildHTMLMultiLineChart(netdata))
-		b.WriteString(`<div class="legend">
-  <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span> CPU</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#22c55e"></span> RAM</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span> GPU</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#f97316"></span> Disk</div>
-</div>`)
-		b.WriteString(`</div>`)
-	}
 
 	// Hardware info
 	if hardware != nil {
@@ -260,6 +214,39 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 		b.WriteString(`</div>`)
 	}
 
+	// Stats cards
+	b.WriteString(fmt.Sprintf(`<h2>Statistiche</h2>
+<div class="stats">
+  <div class="stat-card"><div class="label">File totali</div><div class="value">%d</div></div>
+  <div class="stat-card"><div class="label">OK</div><div class="value" style="color:#22c55e">%d</div></div>
+  <div class="stat-card"><div class="label">FAIL</div><div class="value" style="color:#ef4444">%d</div></div>
+  <div class="stat-card"><div class="label">Tempo totale</div><div class="value">%.0f ms</div></div>
+  <div class="stat-card"><div class="label">Tempo medio</div><div class="value">%.1f ms</div></div>
+  <div class="stat-card"><div class="label">StdDev</div><div class="value">%.1f ms</div></div>
+</div>`, len(eval.Entries), okCount, len(eval.Entries)-okCount, totalMs, mean, std))
+
+	// Accuracy chart
+	if len(accuracy) > 1 {
+		b.WriteString(`<h2>Accuracy nel Tempo</h2>
+<div class="chart-container">`)
+		b.WriteString(buildHTMLLineChart(accuracy, "Accuracy %", 0, 100, "#3b82f6"))
+		b.WriteString(`</div>`)
+	}
+
+	// Netdata
+	if netdata != nil && len(netdata.Timestamps) > 0 {
+		b.WriteString(`<h2>Metriche nel Tempo</h2>
+<div class="chart-container">`)
+		b.WriteString(buildHTMLMultiLineChart(netdata))
+		b.WriteString(`<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span> CPU</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#22c55e"></span> RAM</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span> GPU</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#f97316"></span> Disk</div>
+</div>`)
+		b.WriteString(`</div>`)
+	}
+
 	// Extras
 	if len(eval.Extras) > 0 {
 		b.WriteString(`<h2>Extras</h2>
@@ -270,7 +257,100 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 		b.WriteString(`</div>`)
 	}
 
+	// Link to results
+	b.WriteString(`<a href="/results.html" class="results-link">Mostra Risultati Completi</a>`)
+
 	b.WriteString(`</div></body></html>`)
+	return b.String()
+}
+
+func generateResultsHTML(eval *EvaluationFile) string {
+	var b strings.Builder
+
+	b.WriteString(`<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risultati - ` + escHTML(eval.Title) + `</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --border: #3b82f6;
+    --border-light: #e2e8f0;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --accent: #3b82f6;
+    --ok: #22c55e;
+    --fail: #ef4444;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+  }
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
+  }
+  h1 { font-size: 1.5rem; text-align: center; margin-bottom: 1.5rem; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th {
+    text-align: left;
+    background: var(--bg);
+    border-bottom: 2px solid var(--border-light);
+    padding: 0.5rem 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+  td { padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--border-light); }
+  tr:hover td { background: var(--bg); }
+  .ok { color: var(--ok); font-weight: bold; }
+  .fail { color: var(--fail); font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="page">
+<a href="/" class="back-link">← Torna al Report</a>
+<h1>Risultati</h1>
+<table>
+<thead><tr><th>#</th><th>File</th><th>Stato</th><th>Tempo (ms)</th><th>Tag</th></tr></thead>
+<tbody>`)
+
+	for i, e := range eval.Entries {
+		status := "OK"
+		cls := "ok"
+		if len(e.Tags) == 0 {
+			status = "FAIL"
+			cls = "fail"
+		}
+		tag := ""
+		if len(e.Tags) > 0 {
+			tag = e.Tags[0]
+		}
+		b.WriteString(fmt.Sprintf("<tr><td>%d</td><td>%s</td><td class=\"%s\">%s</td><td>%.0f</td><td>%s</td></tr>",
+			i+1, escHTML(e.File), cls, status, entryDuration(e), escHTML(tag)))
+	}
+
+	b.WriteString(`</tbody></table>
+</div></body></html>`)
 	return b.String()
 }
 

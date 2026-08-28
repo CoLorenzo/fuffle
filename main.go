@@ -44,7 +44,7 @@ const (
 	alphanumericChars    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 )
 
-const version = "1.4.0"
+const version = "1.5.0"
 
 func main() {
 	if len(os.Args) < 2 {
@@ -374,7 +374,8 @@ func runReport(args []string) {
 
 	if serveMode {
 		html := generateHTML(eval, netdata, hardware)
-		if err := serveHTML(html, serveAddr); err != nil {
+		resultsHTML := generateResultsHTML(eval)
+		if err := serveHTML(html, resultsHTML, serveAddr); err != nil {
 			fmt.Fprintf(os.Stderr, "Error serving report: %v\n", err)
 			os.Exit(1)
 		}
