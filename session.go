@@ -56,11 +56,11 @@ func sessionNew() {
 func sessionInsert(args []string) {
 	if len(args) < 1 {
 		fmt.Fprintf(os.Stderr, "Error: session insert requires flags\n")
-		fmt.Fprintf(os.Stderr, "Usage: %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Usage: %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2] [--result \"output\"]\n", os.Args[0])
 		os.Exit(1)
 	}
 
-	var file string
+	var file, result string
 	var start, end int64
 	var tags []string
 
@@ -69,6 +69,11 @@ func sessionInsert(args []string) {
 		case "-f":
 			if i+1 < len(args) {
 				file = args[i+1]
+				i++
+			}
+		case "--result":
+			if i+1 < len(args) {
+				result = args[i+1]
 				i++
 			}
 		case "--start":
@@ -122,6 +127,7 @@ func sessionInsert(args []string) {
 		StartDate: start,
 		EndDate:   end,
 		Tags:      tags,
+		Result:    result,
 	}
 	session.Entries = append(session.Entries, entry)
 

@@ -331,7 +331,7 @@ func generateResultsHTML(eval *EvaluationFile) string {
 <a href="/" class="back-link">← Torna al Report</a>
 <h1>Risultati</h1>
 <table>
-<thead><tr><th>#</th><th>File</th><th>Stato</th><th>Tempo (ms)</th><th>Tag</th></tr></thead>
+<thead><tr><th>#</th><th>File</th><th>Stato</th><th>Tempo (ms)</th><th>Tag</th><th>Result</th></tr></thead>
 <tbody>`)
 
 	for i, e := range eval.Entries {
@@ -345,8 +345,8 @@ func generateResultsHTML(eval *EvaluationFile) string {
 		if len(e.Tags) > 0 {
 			tag = e.Tags[0]
 		}
-		b.WriteString(fmt.Sprintf("<tr><td>%d</td><td>%s</td><td class=\"%s\">%s</td><td>%.0f</td><td>%s</td></tr>",
-			i+1, escHTML(e.File), cls, status, entryDuration(e), escHTML(tag)))
+		b.WriteString(fmt.Sprintf("<tr><td>%d</td><td>%s</td><td class=\"%s\">%s</td><td>%.0f</td><td>%s</td><td>%s</td></tr>",
+			i+1, escHTML(e.File), cls, status, entryDuration(e), escHTML(tag), escHTML(e.Result)))
 	}
 
 	b.WriteString(`</tbody></table>
