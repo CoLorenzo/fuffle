@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"strconv"
@@ -17,8 +18,12 @@ type SessionInfo struct {
 }
 
 type SessionFile struct {
-	Info    SessionInfo       `yaml:"info,omitempty"`
-	Entries []EvaluationEntry `yaml:"entries"`
+	Title        string            `yaml:"title,omitempty"`
+	BigfetchFile string            `yaml:"bigfetchfile,omitempty"`
+	NetdataFile  string            `yaml:"netdatafile,omitempty"`
+	Extras       []Extra           `yaml:"extras,omitempty"`
+	Info         SessionInfo       `yaml:"info,omitempty"`
+	Entries      []EvaluationEntry `yaml:"entries"`
 }
 
 func sessionNew() {
@@ -26,7 +31,29 @@ func sessionNew() {
 		fmt.Fprintf(os.Stderr, "Warning: %s already exists, overwriting\n", sessionFile)
 	}
 
-	session := SessionFile{Info: SessionInfo{}, Entries: []EvaluationEntry{}}
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Print("Title: ")
+	title, _ := reader.ReadString('\n')
+	title = strings.TrimSpace(title)
+
+	fmt.Print("Bigfetch file (empty to skip): ")
+	bigfetch, _ := reader.ReadString('\n')
+	bigfetch = strings.TrimSpace(bigfetch)
+
+	fmt.Print("Netdata file (empty to skip): ")
+	netdata, _ := reader.ReadString('\n')
+	netdata = strings.TrimSpace(netdata)
+
+	session := SessionFile{
+		Title:        title,
+		BigfetchFile: bigfetch,
+		NetdataFile:  netdata,
+		Extras:       []Extra{},
+		Info:         SessionInfo{},
+		Entries:      []EvaluationEntry{},
+	}
+
 	data, err := yaml.Marshal(session)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error marshaling session: %v\n", err)
