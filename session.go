@@ -11,8 +11,13 @@ import (
 
 const sessionFile = "session.yaml"
 
+type SessionInfo struct {
+	Starttime int64 `yaml:"starttime,omitempty"`
+	Endtime   int64 `yaml:"endtime,omitempty"`
+}
+
 type SessionFile struct {
-	Title   string            `yaml:"title,omitempty"`
+	Info    SessionInfo       `yaml:"info,omitempty"`
 	Entries []EvaluationEntry `yaml:"entries"`
 }
 
@@ -21,7 +26,7 @@ func sessionNew() {
 		fmt.Fprintf(os.Stderr, "Warning: %s already exists, overwriting\n", sessionFile)
 	}
 
-	session := SessionFile{Title: "", Entries: []EvaluationEntry{}}
+	session := SessionFile{Info: SessionInfo{}, Entries: []EvaluationEntry{}}
 	data, err := yaml.Marshal(session)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error marshaling session: %v\n", err)
@@ -39,21 +44,16 @@ func sessionNew() {
 func sessionInsert(args []string) {
 	if len(args) < 1 {
 		fmt.Fprintf(os.Stderr, "Error: session insert requires flags\n")
-		fmt.Fprintf(os.Stderr, "Usage: %s session insert -r \"result\" -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Usage: %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
 		os.Exit(1)
 	}
 
-	var result, file string
+	var file string
 	var start, end int64
 	var tags []string
 
 	for i := 0; i < len(args); i++ {
 		switch args[i] {
-		case "-r":
-			if i+1 < len(args) {
-				result = args[i+1]
-				i++
-			}
 		case "-f":
 			if i+1 < len(args) {
 				file = args[i+1]
@@ -110,9 +110,15 @@ func sessionInsert(args []string) {
 		StartDate: start,
 		EndDate:   end,
 		Tags:      tags,
-		Result:    result,
 	}
 	session.Entries = append(session.Entries, entry)
+
+	if session.Info.Starttime == 0 || start < session.Info.Starttime {
+		session.Info.Starttime = start
+	}
+	if end > session.Info.Endtime {
+		session.Info.Endtime = end
+	}
 
 	data, err := yaml.Marshal(session)
 	if err != nil {
@@ -126,6 +132,36 @@ func sessionInsert(args []string) {
 	}
 
 	fmt.Printf("Added entry to %s (%d total)\n", sessionFile, len(session.Entries))
+}
+
+func sessionStartdate() {
+	session, err := loadSession()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	if session.Info.Starttime == 0 {
+		fmt.Fprintf(os.Stderr, "No entries in session\n")
+		os.Exit(1)
+	}
+
+	fmt.Printf("%d\n", session.Info.Starttime/1000)
+}
+
+func sessionEnddate() {
+	session, err := loadSession()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	if session.Info.Endtime == 0 {
+		fmt.Fprintf(os.Stderr, "No entries in session\n")
+		os.Exit(1)
+	}
+
+	fmt.Printf("%d\n", session.Info.Endtime/1000)
 }
 
 func loadSession() (*SessionFile, error) {

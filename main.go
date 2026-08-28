@@ -44,6 +44,8 @@ const (
 	alphanumericChars    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 )
 
+const version = "1.1.1"
+
 func main() {
 	if len(os.Args) < 2 {
 		printUsage()
@@ -53,6 +55,8 @@ func main() {
 	flag := os.Args[1]
 
 	switch flag {
+	case "--version", "-v":
+		fmt.Printf("fuffle %s\n", version)
 	case "--mix":
 		runMix(os.Args[2:])
 	case "--assessment":
@@ -70,12 +74,16 @@ func main() {
 
 func printUsage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
+	fmt.Fprintf(os.Stderr, "  %s --version, -v\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s --mix <dir1> [dir2] [dir3] ...\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s --assessment <file.txt>\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s --report <evaluations.yaml> [--output <file>] [--serve [:port]]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session new\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "  %s session insert -r \"result\" -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session startdate\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session enddate\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "\nOptions:\n")
+	fmt.Fprintf(os.Stderr, "  --version, -v  Print version\n")
 	fmt.Fprintf(os.Stderr, "  --mix          Shuffle files from directories into ./mixed/ with anonymized names\n")
 	fmt.Fprintf(os.Stderr, "  --assessment   Check folder existence from a file listing and print report\n")
 	fmt.Fprintf(os.Stderr, "  --report       Generate report from evaluation YAML file\n")
@@ -84,6 +92,8 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  session        Manage evaluation sessions\n")
 	fmt.Fprintf(os.Stderr, "    new            Create new session.yaml\n")
 	fmt.Fprintf(os.Stderr, "    insert         Add entry to session.yaml\n")
+	fmt.Fprintf(os.Stderr, "    startdate      Print session start time (date +%s format)\n")
+	fmt.Fprintf(os.Stderr, "    enddate        Print session end time (date +%s format)\n")
 }
 
 // runMix handles the --mix mode: shuffles files from given directories into ./mixed/.
@@ -298,6 +308,10 @@ func runSession(args []string) {
 		sessionNew()
 	case "insert":
 		sessionInsert(args[1:])
+	case "startdate":
+		sessionStartdate()
+	case "enddate":
+		sessionEnddate()
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown session subcommand: %s\n", sub)
 		os.Exit(1)

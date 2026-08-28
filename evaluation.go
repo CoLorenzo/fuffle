@@ -12,7 +12,6 @@ type EvaluationEntry struct {
 	StartDate int64    `yaml:"start_date"`
 	EndDate   int64    `yaml:"end_date"`
 	Tags      []string `yaml:"tags"`
-	Result    string   `yaml:"result,omitempty"`
 }
 
 type Extra struct {
