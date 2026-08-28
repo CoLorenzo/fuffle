@@ -134,7 +134,7 @@ func sessionInsert(args []string) {
 	fmt.Printf("Added entry to %s (%d total)\n", sessionFile, len(session.Entries))
 }
 
-func sessionStartdate() {
+func sessionStarttime() {
 	session, err := loadSession()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
@@ -149,7 +149,7 @@ func sessionStartdate() {
 	fmt.Printf("%d\n", session.Info.Starttime/1000)
 }
 
-func sessionEnddate() {
+func sessionEndtime() {
 	session, err := loadSession()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)

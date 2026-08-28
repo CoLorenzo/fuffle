@@ -80,8 +80,8 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  %s --report <evaluations.yaml> [--output <file>] [--serve [:port]]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session new\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "  %s session startdate\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "  %s session enddate\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session starttime\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session endtime\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "\nOptions:\n")
 	fmt.Fprintf(os.Stderr, "  --version, -v  Print version\n")
 	fmt.Fprintf(os.Stderr, "  --mix          Shuffle files from directories into ./mixed/ with anonymized names\n")
@@ -92,8 +92,8 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  session        Manage evaluation sessions\n")
 	fmt.Fprintf(os.Stderr, "    new            Create new session.yaml\n")
 	fmt.Fprintf(os.Stderr, "    insert         Add entry to session.yaml\n")
-	fmt.Fprintf(os.Stderr, "    startdate      Print session start time (date +%s format)\n")
-	fmt.Fprintf(os.Stderr, "    enddate        Print session end time (date +%s format)\n")
+	fmt.Fprintf(os.Stderr, "    starttime      Print session start time (date +%s format)\n")
+	fmt.Fprintf(os.Stderr, "    endtime        Print session end time (date +%s format)\n")
 }
 
 // runMix handles the --mix mode: shuffles files from given directories into ./mixed/.
@@ -308,10 +308,10 @@ func runSession(args []string) {
 		sessionNew()
 	case "insert":
 		sessionInsert(args[1:])
-	case "startdate":
-		sessionStartdate()
-	case "enddate":
-		sessionEnddate()
+	case "starttime":
+		sessionStarttime()
+	case "endtime":
+		sessionEndtime()
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown session subcommand: %s\n", sub)
 		os.Exit(1)
