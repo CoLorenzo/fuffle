@@ -161,6 +161,34 @@ func sessionInsert(args []string) {
 	fmt.Printf("Added entry to %s (%d total)\n", sessionFile, len(session.Entries))
 }
 
+func sessionTitle(args []string) {
+	if len(args) < 1 {
+		fmt.Fprintf(os.Stderr, "Usage: %s session title \"new title\"\n", os.Args[0])
+		os.Exit(1)
+	}
+
+	session, err := loadSession()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	session.Title = args[0]
+
+	data, err := yaml.Marshal(session)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error marshaling session: %v\n", err)
+		os.Exit(1)
+	}
+
+	if err := os.WriteFile(sessionFile, data, 0644); err != nil {
+		fmt.Fprintf(os.Stderr, "Error writing %s: %v\n", sessionFile, err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Title set to: %s\n", session.Title)
+}
+
 func sessionStarttime() {
 	session, err := loadSession()
 	if err != nil {

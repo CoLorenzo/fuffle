@@ -79,6 +79,7 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  %s --assessment <file.txt>\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s --report <evaluations.yaml> [--output <file>] [--serve [:port]]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session new\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s session title \"new title\"\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session starttime\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session endtime\n", os.Args[0])
@@ -308,6 +309,8 @@ func runSession(args []string) {
 		sessionNew()
 	case "insert":
 		sessionInsert(args[1:])
+	case "title":
+		sessionTitle(args[1:])
 	case "starttime":
 		sessionStarttime()
 	case "endtime":
