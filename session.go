@@ -32,7 +32,7 @@ func sessionNew() {
 
 	session := SessionFile{
 		Title:        "title",
-		BigfetchFile: "",
+		BigfetchFile: "./bigfetch.json",
 		NetdataFile:  "./metrics.json",
 		Extras:       []Extra{},
 		Info:         SessionInfo{},
