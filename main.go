@@ -65,6 +65,8 @@ func main() {
 		runReport(os.Args[2:])
 	case "session":
 		runSession(os.Args[2:])
+	case "config":
+		runConfig(os.Args[2:])
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown option: %s\n\n", flag)
 		printUsage()
@@ -83,7 +85,7 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  %s session insert -f file.py --start 123 --end 456 [--tags ok,tag2] [--result \"output\"]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session starttime\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "  %s session endtime\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "  %s session port [port]\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s config set <key> <value>\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "\nOptions:\n")
 	fmt.Fprintf(os.Stderr, "  --version, -v  Print version\n")
 	fmt.Fprintf(os.Stderr, "  --mix          Shuffle files from directories into ./mixed/ with anonymized names\n")
@@ -96,7 +98,8 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "    insert         Add entry to session.yaml\n")
 	fmt.Fprintf(os.Stderr, "    starttime      Print session start time (date +%s format)\n")
 	fmt.Fprintf(os.Stderr, "    endtime        Print session end time (date +%s format)\n")
-	fmt.Fprintf(os.Stderr, "    port           Get or set serve port\n")
+	fmt.Fprintf(os.Stderr, "  config         Manage configuration\n")
+	fmt.Fprintf(os.Stderr, "    set            Set config value in ~/.config/fuffle/config.json\n")
 }
 
 // runMix handles the --mix mode: shuffles files from given directories into ./mixed/.
@@ -296,13 +299,30 @@ func runAssessment(args []string) {
 	fmt.Printf("  Correctness:    %.1f%%\n", percentage)
 }
 
+// runConfig handles the config subcommand.
+func runConfig(args []string) {
+	if len(args) < 1 {
+		fmt.Fprintf(os.Stderr, "Error: config requires a subcommand\n")
+		fmt.Fprintf(os.Stderr, "Usage: %s config set <key> <value>\n", os.Args[0])
+		os.Exit(1)
+	}
+
+	sub := args[0]
+	switch sub {
+	case "set":
+		configSet(args[1:])
+	default:
+		fmt.Fprintf(os.Stderr, "Unknown config subcommand: %s\n", sub)
+		os.Exit(1)
+	}
+}
+
 // runSession handles the session subcommand: new or insert.
 func runSession(args []string) {
 	if len(args) < 1 {
 		fmt.Fprintf(os.Stderr, "Error: session requires a subcommand\n")
 		fmt.Fprintf(os.Stderr, "Usage: %s session new\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "       %s session insert -r \"result\" -f file.py --start 123 --end 456 [--tags ok,tag2]\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "       %s session port [port]\n", os.Args[0])
 		os.Exit(1)
 	}
 
@@ -318,8 +338,6 @@ func runSession(args []string) {
 		sessionStarttime()
 	case "endtime":
 		sessionEndtime()
-	case "port":
-		sessionPort(args[1:])
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown session subcommand: %s\n", sub)
 		os.Exit(1)
