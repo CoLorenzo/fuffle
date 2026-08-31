@@ -76,20 +76,39 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
     font-size: 0.9rem;
     margin-bottom: 2rem;
   }
-  h2 {
-    font-size: 1.1rem;
+  .section {
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .section-header h2 {
+    font-size: 1.15rem;
     color: var(--accent);
-    margin: 2rem 0 1rem 0;
+  }
+  .section-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+  .card h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
   }
   .results-summary {
     display: flex;
     gap: 2rem;
     align-items: center;
-    background: var(--bg);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin: 1rem 0;
     flex-wrap: wrap;
   }
   .results-legend {
@@ -172,11 +191,6 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
     font-weight: bold;
   }
   .chart-container {
-    background: var(--bg);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem 0;
     overflow-x: auto;
   }
   .chart-container svg { display: block; }
@@ -295,7 +309,6 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 <p class="subtitle">Report generato</p>
 `)
 
-	// Results summary with pie chart
 	total := len(eval.Entries)
 	okCount := 0
 	for _, e := range eval.Entries {
@@ -303,6 +316,30 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 			okCount++
 		}
 	}
+
+	// Section: Extra
+	if len(eval.Extras) > 0 {
+		b.WriteString(`<section class="section">
+<div class="section-header">
+<h2>Extra</h2>
+<p class="section-subtitle">Contenuti aggiuntivi definiti dall'utente</p>
+</div>
+<div class="extras-grid">`)
+		for _, ex := range eval.Extras {
+			b.WriteString(buildExtraCard(ex))
+		}
+		b.WriteString(`</div>
+</section>`)
+	}
+
+	// Section: Risultati
+	b.WriteString(`<section class="section">
+<div class="section-header">
+<h2>Risultati</h2>
+<p class="section-subtitle">Esito della valutazione sui file</p>
+</div>`)
+
+	// Card: Percentuali
 	if total > 0 {
 		colors := []string{"#22c55e", "#3b82f6", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899", "#06b6d4", "#84cc16"}
 		entries := make([]struct {
@@ -325,7 +362,8 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 			}
 		}
 
-		b.WriteString(`<h2>Risultati</h2>
+		b.WriteString(`<div class="card">
+<h3>Percentuali</h3>
 <div class="results-summary">
 <div class="results-legend">
 <h3>Uniques (` + fmt.Sprintf("%d", len(entries)) + `)</h3>`)
@@ -354,47 +392,7 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 <div class="pie-center">` + fmt.Sprintf("%d", total) + `<small>file</small></div>
 </div>
 </div>`)
-	}
-
-	// Hardware info
-	if hardware != nil {
-		b.WriteString(`<h2>Sistema</h2>
-<div class="stats">`)
-
-		if hardware.CPU.Model != "" {
-			b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">CPU</div><div class="value">%s</div></div>`, escHTML(hardware.CPU.Model)))
-			b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Core / Thread</div><div class="value">%d / %d</div></div>`, hardware.CPU.Cores, hardware.CPU.Threads))
-		}
-
-		if len(hardware.GPU) > 0 {
-			for _, gpu := range hardware.GPU {
-				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">GPU</div><div class="value">%s</div></div>`, escHTML(gpu.Model)))
-				if gpu.VRAM != "" {
-					b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">VRAM</div><div class="value">%s</div></div>`, escHTML(gpu.VRAM)))
-				}
-			}
-		}
-
-		if len(hardware.RAM) > 0 {
-			for _, ram := range hardware.RAM {
-				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">RAM</div><div class="value">%s</div></div>`, escHTML(ram.Model)))
-				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Clock / Tipo</div><div class="value">%s / %s</div></div>`, escHTML(ram.Clock), escHTML(ram.Technology)))
-			}
-		}
-
-		if len(hardware.Disk) > 0 {
-			for _, disk := range hardware.Disk {
-				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Disco</div><div class="value">%s</div></div>`, escHTML(disk.Model)))
-				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Tipo</div><div class="value">%s</div></div>`, escHTML(disk.Type)))
-			}
-		}
-
-		b.WriteString(`</div>`)
-	}
-
-	// Stats cards
-	b.WriteString(fmt.Sprintf(`<h2>Statistiche</h2>
-<div class="stats">
+		b.WriteString(fmt.Sprintf(`<div class="stats">
   <div class="stat-card"><div class="label">File totali</div><div class="value">%d</div></div>
   <div class="stat-card"><div class="label">OK</div><div class="value" style="color:#22c55e">%d</div></div>
   <div class="stat-card"><div class="label">FAIL</div><div class="value" style="color:#ef4444">%d</div></div>
@@ -402,37 +400,85 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
   <div class="stat-card"><div class="label">Tempo medio</div><div class="value">%.1f ms</div></div>
   <div class="stat-card"><div class="label">StdDev</div><div class="value">%.1f ms</div></div>
 </div>`, len(eval.Entries), okCount, len(eval.Entries)-okCount, totalMs, mean, std))
-
-	// Accuracy chart
-	if len(accuracy) > 1 {
-		b.WriteString(`<h2>Accuracy nel Tempo</h2>
-<div class="chart-container">`)
-		b.WriteString(buildCSSAreaChart(accuracy, "Accuracy %", 0, 100, "#3b82f6", "Inizio", "Fine"))
 		b.WriteString(`</div>`)
 	}
 
-	// Netdata
-	if netdata != nil && len(netdata.Timestamps) > 0 {
-		b.WriteString(`<h2>Metriche nel Tempo</h2>
+	// Card: Accuracy nel tempo
+	if len(accuracy) > 1 {
+		b.WriteString(`<div class="card">
+<h3>Accuracy nel Tempo</h3>
 <div class="chart-container">`)
-		b.WriteString(buildCSSMultiAreaChart(netdata))
-		b.WriteString(`<div class="legend">
+		b.WriteString(buildCSSAreaChart(accuracy, "Accuracy %", 0, 100, "#3b82f6", "Inizio", "Fine"))
+		b.WriteString(`</div>
+</div>`)
+	}
+
+	b.WriteString(`</section>`)
+
+	// Section: Metriche
+	hasNetdata := netdata != nil && len(netdata.Timestamps) > 0
+	if hardware != nil || hasNetdata {
+		b.WriteString(`<section class="section">
+<div class="section-header">
+<h2>Metriche</h2>
+<p class="section-subtitle">Sistema e utilizzo delle risorse durante la valutazione</p>
+</div>`)
+
+		// Card: Sistema
+		if hardware != nil {
+			b.WriteString(`<div class="card">
+<h3>Sistema</h3>
+<div class="stats">`)
+
+			if hardware.CPU.Model != "" {
+				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">CPU</div><div class="value">%s</div></div>`, escHTML(hardware.CPU.Model)))
+				b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Core / Thread</div><div class="value">%d / %d</div></div>`, hardware.CPU.Cores, hardware.CPU.Threads))
+			}
+
+			if len(hardware.GPU) > 0 {
+				for _, gpu := range hardware.GPU {
+					b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">GPU</div><div class="value">%s</div></div>`, escHTML(gpu.Model)))
+					if gpu.VRAM != "" {
+						b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">VRAM</div><div class="value">%s</div></div>`, escHTML(gpu.VRAM)))
+					}
+				}
+			}
+
+			if len(hardware.RAM) > 0 {
+				for _, ram := range hardware.RAM {
+					b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">RAM</div><div class="value">%s</div></div>`, escHTML(ram.Model)))
+					b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Clock / Tipo</div><div class="value">%s / %s</div></div>`, escHTML(ram.Clock), escHTML(ram.Technology)))
+				}
+			}
+
+			if len(hardware.Disk) > 0 {
+				for _, disk := range hardware.Disk {
+					b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Disco</div><div class="value">%s</div></div>`, escHTML(disk.Model)))
+					b.WriteString(fmt.Sprintf(`<div class="stat-card"><div class="label">Tipo</div><div class="value">%s</div></div>`, escHTML(disk.Type)))
+				}
+			}
+
+			b.WriteString(`</div>
+</div>`)
+		}
+
+		// Card: Metriche nel tempo
+		if hasNetdata {
+			b.WriteString(`<div class="card">
+<h3>Metriche nel Tempo</h3>
+<div class="chart-container">`)
+			b.WriteString(buildCSSMultiAreaChart(netdata))
+			b.WriteString(`<div class="legend">
   <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span> CPU</div>
   <div class="legend-item"><span class="legend-dot" style="background:#22c55e"></span> RAM</div>
   <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span> GPU</div>
   <div class="legend-item"><span class="legend-dot" style="background:#f97316"></span> Disk</div>
 </div>`)
-		b.WriteString(`</div>`)
-	}
-
-	// Extras
-	if len(eval.Extras) > 0 {
-		b.WriteString(`<h2>Extras</h2>
-<div class="extras-grid">`)
-		for _, ex := range eval.Extras {
-			b.WriteString(buildExtraCard(ex))
+			b.WriteString(`</div>
+</div>`)
 		}
-		b.WriteString(`</div>`)
+
+		b.WriteString(`</section>`)
 	}
 
 	// Link to results
