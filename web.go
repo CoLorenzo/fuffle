@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"strconv"
 	"strings"
+	"time"
 )
 
 func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *HardwareInfo) string {
@@ -118,6 +119,33 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
   .legend-pct { color: var(--text-secondary); font-size: 0.8rem; }
   .pie-container {
     flex-shrink: 0;
+    position: relative;
+    width: 150px;
+    height: 150px;
+  }
+  .pie {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    mask: radial-gradient(closest-side, transparent 64%, #000 65%);
+    -webkit-mask: radial-gradient(closest-side, transparent 64%, #000 65%);
+    box-shadow: inset 0 0 0 1px var(--border-light);
+  }
+  .pie-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  .pie-center small {
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
   .stats {
     display: grid;
@@ -152,6 +180,53 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
     overflow-x: auto;
   }
   .chart-container svg { display: block; }
+  .chart {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    background: var(--bg);
+  }
+  .chart-body {
+    position: absolute;
+    top: 10px;
+    bottom: 14px;
+    left: 46px;
+    right: 12px;
+  }
+  .chart-grid {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to top,
+      transparent 0,
+      transparent calc(25% - 1px),
+      rgba(148, 163, 184, 0.35) calc(25% - 1px),
+      rgba(148, 163, 184, 0.35) 25%);
+  }
+  .chart-fill { position: absolute; inset: 0; }
+  .chart-line { position: absolute; inset: 0; }
+  .chart-yaxis {
+    position: absolute;
+    top: 10px;
+    bottom: 14px;
+    left: 0;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1;
+  }
+  .chart-xaxis {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 0.4rem;
+  }
   .legend {
     display: flex;
     gap: 1.25rem;
@@ -264,40 +339,20 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 </div>`, c, escHTML(e.Label), e.Count, fmt.Sprintf("%.1f%%", e.Pct)))
 		}
 		b.WriteString(`</div>
-<div class="pie-container">`)
-
-		r, cx, cy := 60.0, 70.0, 70.0
-		var cumAngle float64
-		b.WriteString(fmt.Sprintf(`<svg width="140" height="140" viewBox="0 0 140 140">`))
+<div class="pie-container">
+<div class="pie" style="background:conic-gradient(`)
+		var cumPct float64
 		for i, e := range entries {
 			c := colors[i%len(colors)]
-			angle := e.Pct / 100 * 360
-			startA := cumAngle
-			endA := cumAngle + angle
-			cumAngle = endA
-
-			startRad := startA * 3.14159265 / 180
-			endRad := endA * 3.14159265 / 180
-
-			x1 := cx + r*math.Cos(startRad)
-			y1 := cy + r*math.Sin(startRad)
-			x2 := cx + r*math.Cos(endRad)
-			y2 := cy + r*math.Sin(endRad)
-
-			largeArc := 0
-			if angle > 180 {
-				largeArc = 1
+			if i > 0 {
+				b.WriteString(",")
 			}
-
-			if len(entries) == 1 {
-				b.WriteString(fmt.Sprintf(`<circle cx="%v" cy="%v" r="%v" fill="%s"/>`, cx, cy, r, c))
-			} else {
-				b.WriteString(fmt.Sprintf(`<path d="M%v,%v L%v,%v A%v,%v 0 %d,1 %v,%v Z" fill="%s"/>`,
-					cx, cy, x1, y1, r, r, largeArc, x2, y2, c))
-			}
+			b.WriteString(fmt.Sprintf(` %s %.2f%% %.2f%%`, c, cumPct, cumPct+e.Pct))
+			cumPct += e.Pct
 		}
-		b.WriteString(`</svg>`)
-		b.WriteString(`</div>
+		b.WriteString(`)"></div>
+<div class="pie-center">` + fmt.Sprintf("%d", total) + `<small>file</small></div>
+</div>
 </div>`)
 	}
 
@@ -352,7 +407,7 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 	if len(accuracy) > 1 {
 		b.WriteString(`<h2>Accuracy nel Tempo</h2>
 <div class="chart-container">`)
-		b.WriteString(buildHTMLLineChart(accuracy, "Accuracy %", 0, 100, "#3b82f6"))
+		b.WriteString(buildCSSAreaChart(accuracy, "Accuracy %", 0, 100, "#3b82f6", "Inizio", "Fine"))
 		b.WriteString(`</div>`)
 	}
 
@@ -360,7 +415,7 @@ func generateHTML(eval *EvaluationFile, netdata *NetdataMetrics, hardware *Hardw
 	if netdata != nil && len(netdata.Timestamps) > 0 {
 		b.WriteString(`<h2>Metriche nel Tempo</h2>
 <div class="chart-container">`)
-		b.WriteString(buildHTMLMultiLineChart(netdata))
+		b.WriteString(buildCSSMultiAreaChart(netdata))
 		b.WriteString(`<div class="legend">
   <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span> CPU</div>
   <div class="legend-item"><span class="legend-dot" style="background:#22c55e"></span> RAM</div>
@@ -477,53 +532,98 @@ func generateResultsHTML(eval *EvaluationFile) string {
 	return b.String()
 }
 
-const htmlChartW = 1000
-const htmlChartH = 250
-const htmlChartPad = 50
+const (
+	htmlChartH     = 260.0
+	htmlChartTop   = 10.0
+	htmlChartBot   = 14.0
+	htmlChartPadL  = 46.0
+	htmlChartPadR  = 12.0
+	htmlChartLineP = 2.0
+)
 
-func buildHTMLLineChart(data []float64, label string, minVal, maxVal float64, color string) string {
-	var b strings.Builder
-	w := htmlChartW
-	h := htmlChartH
+func hexToRGBA(hex string, alpha float64) string {
+	hex = strings.TrimPrefix(hex, "#")
+	if len(hex) != 6 {
+		return hex
+	}
+	r, _ := strconv.ParseUint(hex[0:2], 16, 8)
+	g, _ := strconv.ParseUint(hex[2:4], 16, 8)
+	b, _ := strconv.ParseUint(hex[4:6], 16, 8)
+	return fmt.Sprintf("rgba(%d,%d,%d,%.2f)", r, g, b, alpha)
+}
 
-	b.WriteString(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">`, w, h+40, w, h+40))
-
-	for i := 0; i <= 4; i++ {
-		gy := 20 + h - i*h/4
-		val := minVal + float64(i)*(maxVal-minVal)/4
-		b.WriteString(fmt.Sprintf(`<line x1="%d" y1="%d" x2="%d" y2="%d" stroke="#e2e8f0" stroke-width="1"/>`, htmlChartPad, gy, w, gy))
-		b.WriteString(fmt.Sprintf(`<text x="%d" y="%d" font-size="11" fill="#94a3b8" font-family="monospace">%.0f</text>`, htmlChartPad-40, gy+4, val))
+func cssChartPolygons(data []float64, minVal, maxVal, lineWidthPct float64) (fillPts, linePts string) {
+	n := len(data)
+	if n == 0 {
+		return "", ""
+	}
+	span := maxVal - minVal
+	if span <= 0 {
+		span = 1
+	}
+	x := func(i int) float64 {
+		if n == 1 {
+			return 50
+		}
+		return float64(i) / float64(n-1) * 100
+	}
+	y := func(v float64) float64 {
+		return 100 - (v-minVal)/span*100
 	}
 
-	if len(data) < 2 {
-		b.WriteString(`</svg>`)
-		return b.String()
-	}
-
-	points := make([]string, len(data))
+	fill := make([]string, 0, n+2)
+	fill = append(fill, "0% 100%")
 	for i, v := range data {
-		px := htmlChartPad + i*(w-htmlChartPad)/(len(data)-1)
-		py := 20 + h - int((v-minVal)/(maxVal-minVal)*float64(h))
-		points[i] = fmt.Sprintf("%d,%d", px, py)
+		fill = append(fill, fmt.Sprintf("%.3f%% %.3f%%", x(i), y(v)))
 	}
-	b.WriteString(fmt.Sprintf(`<polyline points="%s" fill="none" stroke="%s" stroke-width="2"/>`, strings.Join(points, " "), color))
+	fill = append(fill, "100% 100%")
+	fillPts = strings.Join(fill, ", ")
 
-	b.WriteString(fmt.Sprintf(`<text x="%d" y="%d" font-size="11" fill="#94a3b8" font-family="monospace" transform="rotate(-90,%d,%d)">%s</text>`, htmlChartPad-45, 20+h/2, htmlChartPad-45, 20+h/2, label))
+	if lineWidthPct > 0 {
+		line := make([]string, 0, 2*n)
+		for i, v := range data {
+			line = append(line, fmt.Sprintf("%.3f%% %.3f%%", x(i), y(v)-lineWidthPct))
+		}
+		for i := n - 1; i >= 0; i-- {
+			line = append(line, fmt.Sprintf("%.3f%% %.3f%%", x(i), y(data[i])))
+		}
+		linePts = strings.Join(line, ", ")
+	}
+	return fillPts, linePts
+}
 
-	b.WriteString(`</svg>`)
+func buildCSSAreaChart(data []float64, label string, minVal, maxVal float64, color, startLabel, endLabel string) string {
+	if len(data) < 2 {
+		return `<div class="chart-xaxis"><span>Dati insufficienti</span></div>`
+	}
+	t := htmlChartLineP / (htmlChartH - htmlChartTop - htmlChartBot) * 100
+	fill, line := cssChartPolygons(data, minVal, maxVal, t)
+
+	var b strings.Builder
+	b.WriteString(`<div class="chart" title="` + label + `">`)
+	b.WriteString(`<div class="chart-yaxis">`)
+	for i := 0; i <= 4; i++ {
+		val := minVal + float64(i)*(maxVal-minVal)/4
+		b.WriteString(fmt.Sprintf(`<span>%.0f</span>`, val))
+	}
+	b.WriteString(`</div><div class="chart-body">`)
+	b.WriteString(`<div class="chart-grid"></div>`)
+	b.WriteString(fmt.Sprintf(`<div class="chart-fill" style="background:linear-gradient(to bottom,%s,%s);clip-path:polygon(%s)"></div>`,
+		hexToRGBA(color, 0.20), hexToRGBA(color, 0.03), fill))
+	b.WriteString(fmt.Sprintf(`<div class="chart-line" style="background:%s;clip-path:polygon(%s)"></div>`, color, line))
+	b.WriteString(`</div></div>`)
+	b.WriteString(fmt.Sprintf(`<div class="chart-xaxis"><span>%s</span><span>%s</span></div>`, startLabel, endLabel))
 	return b.String()
 }
 
-func buildHTMLMultiLineChart(netdata *NetdataMetrics) string {
-	var b strings.Builder
-	w := htmlChartW
-	h := htmlChartH
-
-	b.WriteString(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">`, w, h+40, w, h+40))
-
+func buildCSSMultiAreaChart(netdata *NetdataMetrics) string {
+	n := len(netdata.Timestamps)
+	if n < 2 {
+		return `<div class="chart-xaxis"><span>Dati insufficienti</span></div>`
+	}
 	maxVal := 0.0
-	for _, sets := range [][]float64{netdata.CPU, netdata.RAM, netdata.GPU, netdata.Disk} {
-		for _, v := range sets {
+	for _, s := range [][]float64{netdata.CPU, netdata.RAM, netdata.GPU, netdata.Disk} {
+		for _, v := range s {
 			if v > maxVal {
 				maxVal = v
 			}
@@ -533,42 +633,47 @@ func buildHTMLMultiLineChart(netdata *NetdataMetrics) string {
 		maxVal = 100
 	}
 
-	for i := 0; i <= 4; i++ {
-		gy := 20 + h - i*h/4
-		val := float64(i) * maxVal / 4
-		b.WriteString(fmt.Sprintf(`<line x1="%d" y1="%d" x2="%d" y2="%d" stroke="#e2e8f0" stroke-width="1"/>`, htmlChartPad, gy, w, gy))
-		b.WriteString(fmt.Sprintf(`<text x="%d" y="%d" font-size="11" fill="#94a3b8" font-family="monospace">%.0f</text>`, htmlChartPad-40, gy+4, val))
-	}
-
-	n := len(netdata.Timestamps)
-	if n < 2 {
-		b.WriteString(`</svg>`)
-		return b.String()
-	}
-
-	type series struct {
-		data  []float64
+	series := []struct {
+		name  string
 		color string
+		data  []float64
+	}{
+		{"CPU", "#3b82f6", netdata.CPU},
+		{"RAM", "#22c55e", netdata.RAM},
+		{"GPU", "#a855f7", netdata.GPU},
+		{"Disk", "#f97316", netdata.Disk},
 	}
-	allSeries := []series{
-		{netdata.CPU, "#3b82f6"},
-		{netdata.RAM, "#22c55e"},
-		{netdata.GPU, "#a855f7"},
-		{netdata.Disk, "#f97316"},
-	}
+	t := htmlChartLineP / (htmlChartH - htmlChartTop - htmlChartBot) * 100
 
-	for _, s := range allSeries {
-		points := make([]string, n)
-		for i, v := range s.data {
-			px := htmlChartPad + i*(w-htmlChartPad)/(n-1)
-			py := 20 + h - int(v/maxVal*float64(h))
-			points[i] = fmt.Sprintf("%d,%d", px, py)
+	var b strings.Builder
+	b.WriteString(`<div class="chart">`)
+	b.WriteString(`<div class="chart-yaxis">`)
+	for i := 0; i <= 4; i++ {
+		b.WriteString(fmt.Sprintf(`<span>%.0f</span>`, float64(i)*maxVal/4))
+	}
+	b.WriteString(`</div><div class="chart-body">`)
+	b.WriteString(`<div class="chart-grid"></div>`)
+	for _, s := range series {
+		fill, line := cssChartPolygons(s.data, 0, maxVal, t)
+		if fill == "" {
+			continue
 		}
-		b.WriteString(fmt.Sprintf(`<polyline points="%s" fill="none" stroke="%s" stroke-width="2"/>`, strings.Join(points, " "), s.color))
+		b.WriteString(fmt.Sprintf(`<div class="chart-fill" title="%s" style="background:linear-gradient(to bottom,%s,%s);clip-path:polygon(%s)"></div>`,
+			s.name, hexToRGBA(s.color, 0.14), hexToRGBA(s.color, 0.02), fill))
+		b.WriteString(fmt.Sprintf(`<div class="chart-line" title="%s" style="background:%s;clip-path:polygon(%s)"></div>`,
+			s.name, s.color, line))
 	}
-
-	b.WriteString(`</svg>`)
+	b.WriteString(`</div></div>`)
+	b.WriteString(fmt.Sprintf(`<div class="chart-xaxis"><span>%s</span><span>%s</span></div>`,
+		formatTs(netdata.Timestamps[0]), formatTs(netdata.Timestamps[n-1])))
 	return b.String()
+}
+
+func formatTs(ts int64) string {
+	if ts > 1e11 {
+		return time.UnixMilli(ts).Format("15:04:05")
+	}
+	return time.Unix(ts, 0).Format("15:04:05")
 }
 
 func buildExtraCard(ex Extra) string {
